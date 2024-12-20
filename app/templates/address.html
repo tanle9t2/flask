@@ -1,0 +1,202 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/address.css') }}">
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/address.js') }}"></script>
+
+{% endblock %}
+{% block content %}
+    <div class="my-bg-color pt-3 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <div class="col-md-12 item-bg-color p-0 rounded">
+                        <div class="p-4 align-items-center address-heading d-flex justify-content-between">
+                            <h4 class="m-0 font-weight-bold">Địa chỉ của tôi</h4>
+                            <button class="btn btn-add-address btn-primary">+ Thêm địa chỉ mới</button>
+                        </div>
+
+                        <ul class="list-unstyled address-list p-4 m-0">
+                            {% for address in address_list %}
+                                <li id="address-{{ address.address_id }}" class="address-item d-flex">
+                                    <div class="address-infor">
+                                        <div class="address-card d-flex justify-content-between align-items-start">
+                                            <div class="address-info d-flex align-items-center">
+                                                <span class="name">{{ address.get_fullname() }}</span>
+                                                <span class="phone">|{{ address.phone_number }}</span>
+                                            </div>
+
+                                        </div>
+                                        <p class="address m-0 mt-2"> {{ address.address }}</p>
+                                        <p class="address m-0 mb-2"> {{ address.to_string_without_user() }}</p>
+                                    </div>
+                                    <div class="address-btn-controll d-flex">
+                                        <p class="mr-3 cursor-pointer btn-update-address font-weight-bold text-primary">
+                                            Cập nhật</p>
+                                        <div class="modal modal-update-address">
+                                            <div class="overlay"></div>
+                                            <div class="modal-body item-bg-color">
+                                                <div class="header d-flex">
+                                                    <p class="flex-fill text-center font-weight-bold">Cập nhật địa
+                                                        chỉ</p>
+                                                    <span class="text-secondary cursor-pointer close-form">
+                                                        <i class="fa-solid fa-x"></i>
+                                                    </span>
+                                                </div>
+                                                <form class="form-address">
+                                                    <label for="name">Họ và tên</label>
+                                                    <input class="form-address-input" type="text" id="name" name="name"
+                                                           placeholder="Lê Tân" value="{{ address.get_fullname() }}">
+
+                                                    <label for="phone">Số điện thoại</label>
+                                                    <input class="form-address-input" type="tel" id="phone" name="phone"
+                                                           placeholder="(+84) 914 132 508"
+                                                           value="{{ address.phone_number }}">
+                                                    <div>
+                                                        <label for="province">Tỉnh/Thành phố</label>
+                                                        <div class=dropdown-toggle
+                                                             data-toggle="dropdown">
+                                                            <input type="text" id="genreSearch"
+                                                                   class="m-0 dropdown-search product-publisher"
+                                                                   name="dropdown-province"
+                                                                   value="{{ address.city }}"
+                                                                   autocomplete="off">
+                                                        </div>
+                                                        <div class="dropdown-menu dropdown-province custom-dropdown-menu">
+
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label class="form-address-input"
+                                                               for="district">Quận/Huyện</label>
+                                                        <div class=dropdown-toggle
+                                                             data-toggle="dropdown">
+                                                            <input type="text" id="dropdown-district"
+                                                                   class="m-0 dropdown-search product-publisher"
+                                                                   name="dropdown-district"
+                                                                   value="{{ address.district }}"
+                                                                   autocomplete="off">
+                                                        </div>
+                                                        <div class="dropdown-menu dropdown-district custom-dropdown-menu">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div>
+                                                        <label for="ward">Phường/Xã</label>
+                                                        <div class=dropdown-toggle
+                                                             data-toggle="dropdown">
+                                                            <input type="text" id="dropdown-ward"
+                                                                   class="m-0 dropdown-search product-publisher"
+                                                                   name="dropdown-ward"
+                                                                   value="{{ address.ward }}"
+                                                                   autocomplete="off">
+                                                        </div>
+                                                        <div class="dropdown-menu dropdown-ward custom-dropdown-menu">
+
+                                                        </div>
+                                                    </div>
+
+                                                    <label for="specific-address">Địa chỉ cụ thể</label>
+                                                    <input class="form-address-input" type="text" id="specific-address"
+                                                           name="specific-address"
+                                                           value="{{ address.address }}"
+                                                           placeholder="B18/47v, Đường Liên Ấp, Ấp 3 (nhà giặt đồ)">
+                                                    <div class="payment-confirm text-center d-flex align-items-center justify-content-end">
+                                                        <p class="btn-back m-0 mr-4 cursor-pointer close-form">Trở
+                                                            lại</p>
+                                                        <button type="submit"
+                                                                class="btn btn-confirm btn-primary btn-large">Xác nhận
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <p onclick="handleOnClickDeleteAddress({{ address.address_id }})"
+                                           class="text-primary cursor-pointer font-weight-bold">Xóa</p>
+                                    </div>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal modal-address">
+        <div class="overlay"></div>
+        <div class="modal-body item-bg-color">
+            <div class="header d-flex">
+                <p class="flex-fill text-center font-weight-bold">Cập nhật địa chỉ</p>
+                <span class="text-secondary cursor-pointer close-form">
+                    <i class="fa-solid fa-x"></i>
+                </span>
+            </div>
+            <form class="form-address">
+                <label for="name">Họ và tên</label>
+                <input class="form-address-input" type="text" id="name" name="name" placeholder="Lê Tân">
+
+
+                <label for="phone">Số điện thoại</label>
+                <input class="form-address-input" type="tel" id="phone" name="phone" placeholder="(+84) 914 132 508">
+
+
+                <div>
+                    <label for="province">Tỉnh/Thành phố</label>
+                    <div class=dropdown-toggle
+                         data-toggle="dropdown">
+                        <input type="text" id="genreSearch"
+                               class="m-0 dropdown-search product-publisher"
+                               name="dropdown-province"
+                               autocomplete="off">
+                    </div>
+                    <div class="dropdown-menu dropdown-province custom-dropdown-menu">
+
+                    </div>
+                </div>
+
+
+                <div>
+                    <label class="form-address-input" for="district">Quận/Huyện</label>
+                    <div class=dropdown-toggle
+                         data-toggle="dropdown">
+                        <input disabled type="text" id="dropdown-district"
+                               class="m-0 dropdown-search product-publisher"
+                               name="dropdown-district"
+                               autocomplete="off">
+                    </div>
+                    <div class="dropdown-menu dropdown-district custom-dropdown-menu">
+
+                    </div>
+                </div>
+
+                <div>
+                    <label for="ward">Phường/Xã</label>
+                    <div class=dropdown-toggle
+                         data-toggle="dropdown">
+                        <input disabled type="text" id="dropdown-ward"
+                               class="m-0 dropdown-search product-publisher"
+                               name="dropdown-ward"
+                               autocomplete="off">
+                    </div>
+                    <div class="dropdown-menu dropdown-ward custom-dropdown-menu">
+
+                    </div>
+                </div>
+
+                <label for="specific-address">Địa chỉ cụ thể</label>
+                <input class="form-address-input" type="text" id="specific-address" name="specific-address"
+                       placeholder="B18/47v, Đường Liên Ấp, Ấp 3 (nhà giặt đồ)">
+                <div class="payment-confirm text-center d-flex align-items-center justify-content-end">
+                    <p class="btn-back m-0 mr-4 cursor-pointer close-form">Trở lại</p>
+                    <button type="submit" class="btn btn-confirm btn-primary btn-large">Xác nhận</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

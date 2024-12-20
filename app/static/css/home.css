@@ -1,0 +1,41 @@
+* {
+    --red: #c92127;
+}
+
+.container {
+    width: 90% !important;
+}
+
+.home-section {
+    border-radius: 7px;
+    background-color: white;
+    padding: 2px 15px;
+    margin: 10px 0;
+}
+
+.image-advertise {
+    width: 75px;
+    height: 75px;
+}
+
+.col-5th {
+    width: 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
+}
+
+.home_category_heading .active {
+    color: var(--red);
+    border-bottom: solid red 3px;
+    font-weight: 600;
+}
+
+.home_category_item {
+    padding: 10px 0;
+    font-weight: 400;
+}
+
+.home_category_heading {
+    border-bottom: solid 1px black;
+    cursor: pointer;
+}

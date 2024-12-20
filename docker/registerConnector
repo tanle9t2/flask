@@ -1,0 +1,20 @@
+{
+  "name": "mysql-connector",
+  "config": {
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "tasks.max": "1",
+    "database.hostname": "192.168.1.33",
+    "database.port": "3306",
+    "database.user": "debezium_user",
+    "database.password": "090224T@n",
+    "database.server.id": "1",
+    "database.server.name": "mysql_server",
+    "database.include.list": "book_store",
+    "table.include.list": "book_store.book,book_store.book_image,book_store.extended_book",
+    "database.history.kafka.bootstrap.servers": "kafka2:29092",
+    "database.history.kafka.topic": "test.mysql_server",
+    "schema.history.internal.kafka.topic": "schema-changes.mysql",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka2:29092",
+    "topic.prefix": "dbs_"
+  }
+}

@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+    <meta name="author" content="Creative Tim">
+    <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+    <link rel="shortcut icon" href="https://cdn0.fahasa.com/media/favicon/default/favicon4.ico">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard/2.0.4/css/nucleo-icons.min.css"
+          integrity="sha512-GhQLa5q131bN6G1TOG7zviS79WU8/18DE5WLS7rHN+EOQ0G3BDJfV6+/g680Cq9ocHU+SLKvO9gFnS0NuhZXGg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+          integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <!-- Argon CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/argon.css') }}" type="text/css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminStatistic.css') }}">
+    <style>
+    .modal {
+        display: none; /* Modal mặc định ẩn */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Nền mờ */
+        justify-content: center;
+        align-items: center;
+        z-index: 1000000000; /* Đảm bảo modal nằm trên các phần tử khác */
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        width: 400px;
+        position: relative;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+<!-- Sidenav -->
+<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <a class="navbar-brand" href="javascript:void(0)">
+                <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
+                     class="navbar-brand-img" alt="...">
+            </a>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Nav items -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">
+                            <i class="ni ni-chart-pie-35 text-primary"></i>
+                            <span class="nav-link-text">Trang chủ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/book-manager">
+                            <i class="ni ni-tv-2 text-primary"></i>
+                            <span class="nav-link-text">Quản lí sách</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/statistic-revenue">
+                            <i class="ni ni-planet text-orange"></i>
+                            <span class="nav-link-text">Thống kê doanh thu</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/statistic-frequency">
+                            <i class="ni ni-pin-3 text-primary"></i>
+                            <span class="nav-link-text">Thống kê tần suất</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/account-manager">
+                            <i class="ni ni-single-02 text-yellow"></i>
+                            <span class="nav-link-text">Quản lí tài khoản</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/bookgerne-manager">
+                            <i class="ni ni-bullet-list-67 text-default"></i>
+                            <span class="nav-link-text">Quản lí thể loại</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/profile">
+                            <i class="ni ni-key-25 text-info"></i>
+                            <span class="nav-link-text">Hồ sơ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">
+                            <i class="ni ni-circle-08 text-pink"></i>
+                            <span class="nav-link-text">Register</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upgrade.html">
+                            <i class="ni ni-send text-dark"></i>
+                            <span class="nav-link-text">Upgrade</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+<!-- Main content -->
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav align-items-center  ml-md-auto ">
+                    <li class="nav-item d-xl-none">
+                        <!-- Sidenav toggler -->
+                        <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                             data-target="#sidenav-main">
+                            <div class="sidenav-toggler-inner">
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item d-sm-none">
+                        <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+                            <i class="ni ni-zoom-split-in"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="ni ni-bell-55"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                            <!-- Dropdown header -->
+                            <div class="px-3 py-3">
+                                <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong>
+                                    notifications.
+                                </h6>
+                            </div>
+                            <!-- List group -->
+                            <div class="list-group list-group-flush">
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>2 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>3 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>5 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">Your posts have been liked a lot.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>2 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-5.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>3 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- View all -->
+                            <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View
+                                all</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="ni ni-ungroup"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
+                            <div class="row shortcuts px-4">
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
+                      <i class="ni ni-calendar-grid-58"></i>
+                    </span>
+                                    <small>Calendar</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
+                      <i class="ni ni-email-83"></i>
+                    </span>
+                                    <small>Email</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
+                      <i class="ni ni-credit-card"></i>
+                    </span>
+                                    <small>Payments</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
+                      <i class="ni ni-books"></i>
+                    </span>
+                                    <small>Reports</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
+                      <i class="ni ni-pin-3"></i>
+                    </span>
+                                    <small>Maps</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
+                      <i class="ni ni-basket"></i>
+                    </span>
+                                    <small>Shop</small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder"
+                         src="{{ current_user.avt_url }}">
+                  </span>
+                                <div class="media-body  ml-2  d-none d-lg-block">
+                                    <span class="mb-0 text-sm  font-weight-bold">{{ current_user.full_name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu  dropdown-menu-right ">
+                            <form action="/account/admin-login" method="POST">
+                                {% if current_user.is_authenticated %}
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Chào {{ current_user.full_name }}</h6>
+                                </div>
+                                <a href="/admin/profile" class="dropdown-item">
+                                    <i class="ni ni-single-02"></i>
+                                    <span>Hồ sơ</span>
+                                </a>
+                                <a href="/account/admin-logout" class="dropdown-item">
+                                    <i class="ni ni-user-run"></i>
+                                    <span>Đăng xuất</span>
+                                </a>
+                                {% else %}
+                                {% endif %}
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4" style="display: flex; width: 100%;">
+                    <!-- Div 1: 23% -->
+                    <div class="col-lg-6 col-7" style="flex: 0 0 23%; max-width: 23%;">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="/admin/statistic-revenue"><i
+                                        class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="/admin/statistic-revenue">Quản lí thể loại</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Div 2: 59% -->
+                    <div class="col-lg-6 col-7" style="flex: 0 0 59%; max-width: 59%;">
+                        <form class="" style="display: flex; gap: 10px; align-items: center;">
+                            <!--                            <div class="dropdown-container">-->
+                            <!--                                <input type="text" id="gerneSearch"-->
+                            <!--                                       class="dropdown-search product-publisher" autocomplete="off"-->
+                            <!--                                       placeholder="Chọn mục thống kê" style="box-sizing: border-box; width: 90%">-->
+                            <!--                                <div class="dropdown-list" id="gerneList"-->
+                            <!--                                     style="box-sizing: border-box; width: 90%"></div>-->
+                            <!--                            </div>-->
+                            <!--                                                        <div style="flex: 1;">-->
+                            <!--                                                            <input type="date" name="from_date" style="width: 100%; box-sizing: border-box;">-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div style="flex: 1;">-->
+                            <!--                                                            <input type="date" name="to_date" style="width: 100%; box-sizing: border-box;">-->
+                            <!--                                                        </div>-->
+                            <!--                                                        <div style="flex: 1;">-->
+                            <!--                                                            <input type="month" name="selected_month" style="width: 100%; box-sizing: border-box;">-->
+                            <!--                                                        </div>-->
+
+                            <div style="">
+                                <input type="text" name="kw" placeholder="Nhập từ khóa"
+                                       style="box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <input type="submit" value="Xác nhận" class="btn btn-neutral"
+                                       style="cursor: pointer;background-color: #2196F3; color: white">
+                            </div>
+                            <div>
+                                <!-- Nút để hiển thị form thêm thể loại mới -->
+                                <input type="button" value="Thêm Thể Loại Mới" class="btn btn-neutral"
+                                       style="cursor: pointer; background-color: #2196F3; color: white"
+                                       id="addBookGerneButton">
+                            </div>
+
+                            <!--                            <div>-->
+                            <!--                                <input type="submit" value="SL Ban ra" class="btn btn-neutral"-->
+                            <!--                                       style="cursor: pointer;background-color: #2196F3; color: white">-->
+                            <!--                            </div>-->
+                            <!--                            <div>-->
+                            <!--                                <input type="submit" value="SL Con lai" class="btn btn-neutral"-->
+                            <!--                                       style="cursor: pointer;background-color: #2196F3; color: white">-->
+                            <!--                            </div>-->
+                        </form>
+                    </div>
+
+                    <!-- Div 3: 18% -->
+                    <!--                    <div class="col-lg-6 col-5 text-right" style="flex: 0 0 18%; max-width: 18%;">-->
+                    <!--                        <a href="#" class="btn btn-neutral" id="statistic-table-check">Bảng</a>-->
+                    <!--                        <a href="#" class="btn btn-neutral" id="statistic-chart-check">Biểu đồ</a>-->
+                    <!--                    </div>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6" id="statistic-table" style="display: block;">
+        <div class="row justify-content-center">
+            <div class=" col ">
+                <div class="card" style="margin-bottom: 0">
+                    <div class="card-header bg-transparent" style="display: flex; justify-content: space-between">
+                        <h3 class="mb-0">Danh sách thể loại</h3>
+                        <ul class="pagination" style="margin: 0; display: flex; justify-content: center;">
+                            <!-- Nút Previous -->
+                            <li class="page-item{% if books['current_page'] == 1 %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="?page={{ books['current_page'] - 1 }}{% if request.args.get('gerne_id') %}&gerne_id={{ request.args.get('gerne_id') }}{% endif %}">
+                                    <i class="fas fa-angle-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+
+                            <!-- Hiển thị các trang -->
+                            {% for page in books['pages'] %}
+                            <li class="page-item{% if page == books['current_page'] %} active {% endif %}">
+                                <a class="page-link"
+                                   href="?page={{ page }}{% if request.args.get('gerne_id') %}&gerne_id={{ request.args.get('gerne_id') }}{% endif %}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                            {% endfor %}
+
+                            <!-- Nút Next -->
+                            <li class="page-item{% if books['current_page'] == books['total_page'] %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="?page={{ books['current_page'] + 1 }}{% if request.args.get('gerne_id') %}&gerne_id={{ request.args.get('gerne_id') }}{% endif %}">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+
+                    <div class="card-body" style="padding-top: 0">
+                        <div class="row icon-examples">
+                            <div class="col-12">
+                                <div class="table-responsive"
+                                     style="max-height: 507px; overflow-y: auto; border: 1px solid #adb5bd; border-radius: 5px;">
+                                    <table class="table align-items-center table-flush"
+                                           style="border-collapse: collapse; width: 100%; border: 1px solid #adb5bd;">
+                                        <thead class="thead-light" style="position: sticky; top: 0; z-index: 1;">
+                                        <tr>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Cap nhat
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Ma the loai
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="name"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff; max-width: 200px; word-wrap: break-word;">
+                                                Ten the loai
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                lft
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                rgt
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                        {% for s in stats %}
+                                        <tr data-id="{{ s[0] }}"> <!-- Lưu book_id vào data-id của thẻ <tr> -->
+                                            <td style="border: 1px solid #adb5bd; padding: 0;">
+                                                <div class="dropdown col-5 dropdown-btn align-content-center text-right">
+                                                    <button type="button"
+                                                            class="btn btn-primary dropdown-toggle dropdown-btn-change justify-content-end"
+                                                            data-toggle="dropdown"
+                                                            style="background-color: white;color: #c92127;border: 2px solid;margin-left: 12px;">
+                                                    </button>
+                                                    <div class="dropdown-menu">
+                                                        <a class="dropdown-item edit-btn"
+                                                           href="javascript:void(0);">Sửa</a>
+                                                        <a class="dropdown-item delete-btn" href="javascript:void(0);">Xóa</a>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <th scope="row" style="border: 1px solid #adb5bd;">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body text-center">
+                                                        <span class="name mb-0 text-sm text-center">{{ s[0] }}</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="budget text-center"
+                                                style="border: 1px solid #adb5bd; max-width: 200px; word-wrap: break-word; overflow: hidden; text-overflow: ellipsis;"
+                                                data-field="name">
+                                                {{s[1]}}
+                                            </td>
+                                            <td class="budget text-center" style="border: 1px solid #adb5bd;"
+                                                data-field="lft">
+                                                {{s[2]}}
+                                            </td>
+                                            <td class="budget text-center" style="border: 1px solid #adb5bd;"
+                                                data-field="rgt">
+                                                {{s[3]}}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Đảm bảo script chỉ chạy sau khi DOM đã được tải
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Hiển thị modal khi bấm nút "Thêm Thể Loại Mới"
+        document.getElementById('addBookGerneButton').addEventListener('click', function() {
+            document.getElementById('addBookGerneModal').style.display = 'flex';
+        });
+
+        // Đóng modal khi nhấn vào nút đóng (X)
+        var closeModalButton = document.getElementById('close-modal');
+        if (closeModalButton) {
+            closeModalButton.addEventListener('click', function() {
+                document.getElementById('addBookGerneModal').style.display = 'none';
+            });
+        }
+
+        // Xử lý gửi form khi người dùng nhấn "Xác Nhận"
+        document.getElementById('addBookGerneForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Ngăn không cho form reload trang
+
+            const name = document.getElementById('name').value;
+            const lft = parseInt(document.getElementById('lft').value);
+            const rgt = parseInt(document.getElementById('rgt').value);
+
+            const payload = { name, lft, rgt };
+
+            fetch('/admin/add-bookgerne', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+})
+.then(response => response.json())
+.then(data => {
+    console.log(data); // In ra dữ liệu để kiểm tra
+    if (data.success) {
+        alert('Thêm thành công: ' + data.message);
+        location.reload(); // Reload lại trang để cập nhật bảng
+    } else {
+        alert('Thêm thất bại: ' + data.message);
+    }
+})
+.catch(error => {
+    console.error('Lỗi khi thêm thể loại:', error);
+    alert('Đã xảy ra lỗi trong quá trình thêm.');
+});
+        });
+    });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.edit-btn').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // Lấy dòng tr và id sách
+            const row = this.closest('tr');
+            const bookId = row.getAttribute('data-id');
+
+            // Chuyển các ô dữ liệu thành input
+            row.querySelectorAll('.budget').forEach(cell => {
+                const cellContent = cell.textContent.trim();
+                const field = cell.dataset.field; // Lấy tên trường từ data-field
+                if (field) {
+                    cell.innerHTML = `<input type="text" value="${cellContent}" class="edit-input" data-field="${field}">`;
+                }
+            });
+
+            // Ẩn dropdown list khi chỉnh sửa
+            row.querySelectorAll('.dropdown-btn').forEach(dropdown => {
+                dropdown.style.display = 'none'; // Ẩn dropdown
+            });
+
+            // Thêm nút "Cập nhật"
+            const updateButton = document.createElement('button');
+            updateButton.style.marginLeft = '15px';
+            updateButton.style.padding = '12px';
+            updateButton.textContent = 'Cập nhật';
+            updateButton.className = 'update-btn btn btn-success btn-sm';
+            row.querySelector('td:first-child').appendChild(updateButton);
+
+            // Ẩn nút "Sửa"
+            this.style.display = 'none';
+
+            // Xử lý khi bấm "Cập nhật"
+            updateButton.addEventListener('click', function() {
+                const updatedData = {};
+
+                // Thu thập dữ liệu từ các ô input
+                row.querySelectorAll('.edit-input').forEach(input => {
+                    const field = input.dataset.field;
+                    updatedData[field] = input.value;
+                });
+
+                console.log('Updated data being sent:', updatedData);
+
+                // Gửi yêu cầu POST để cập nhật
+                fetch(`/admin/update-bookgerne/${bookId}`, {  // Đổi URL này
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(updatedData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Cập nhật giao diện với dữ liệu trả về
+                        const updatedFields = data.updated;
+                        for (const [field, value] of Object.entries(updatedFields)) {
+                            const cell = row.querySelector(`[data-field="${field}"]`);
+                            if (cell) {
+                                cell.innerHTML = value; // Cập nhật lại nội dung cell
+                            }
+                        }
+
+                        // Xóa nút "Cập nhật" và hiển thị lại nút "Sửa"
+                        updateButton.remove();
+                        row.querySelector('.edit-btn').style.display = 'inline-block';
+
+                        // Hiển thị lại nút dropdown list
+                        row.querySelectorAll('.dropdown-btn').forEach(dropdown => {
+                            dropdown.style.display = 'inline-block'; // Hiển thị lại dropdown
+                        });
+                    } else {
+                        alert('Cập nhật thất bại: ' + (data.message || 'Lỗi không xác định'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating book:', error);
+                    alert('Đã xảy ra lỗi trong quá trình cập nhật.');
+                });
+            });
+        });
+    });
+
+    document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function(event) {
+        event.preventDefault();
+
+        // Lấy dòng tr và id sách
+        const row = this.closest('tr');
+        const bookId = row.getAttribute('data-id');
+
+        // Hiển thị thông báo xác nhận trước khi xóa
+        if (confirm('Bạn có chắc chắn muốn xóa sách này không?')) {
+            // Gửi yêu cầu POST để xóa sách
+            fetch(`/admin/delete-bookgerne/${bookId}`, {  // Đảm bảo URL đúng
+                method: 'POST',
+            })
+            .then(response => response.json())  // Đảm bảo rằng response là JSON
+            .then(data => {
+                if (data.success) {
+                    // Xóa dòng tr khỏi bảng nếu thành công
+                    row.remove();
+                    alert('Thể loại đã được xóa thành công!');
+                } else {
+                    // Thông báo lỗi nếu xóa thất bại
+                    alert('Xóa thất bại: ' + (data.message || 'Lỗi không xác định'));
+                }
+            })
+            .catch(error => {
+                console.error('Error deleting book:', error);
+                alert('Đã xảy ra lỗi trong quá trình xóa.');
+            });
+        }
+    });
+});
+
+});
+
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/adminBookManager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/adminStatistic.js') }}"></script>
+
+<div id="addBookGerneModal" class="modal" style="display: none;">
+    <div class="modal-content" style="width: 400px; margin: auto; background-color: white; padding: 20px; border-radius: 8px; position: relative;">
+        <!-- Nút đóng modal -->
+        <span id="close-modal" style="position: absolute; top: 10px; right: 15px; cursor: pointer;">&times;</span>
+        <h4 style="text-align: center; color: #333;">Thêm Thể Loại Mới</h4>
+        <form id="addBookGerneForm">
+            <div style="margin-bottom: 15px;">
+                <label for="name">Tên Thể Loại:</label>
+                <input type="text" id="name" name="name" required
+                       style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ddd;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="lft">Lft:</label>
+                <input type="number" id="lft" name="lft" required
+                       style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ddd;">
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label for="rgt">Rgt:</label>
+                <input type="number" id="rgt" name="rgt" required
+                       style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ddd;">
+            </div>
+            <button type="submit"
+                    style="width: 100%; padding: 10px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                Xác Nhận
+            </button>
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+.address-heading {
+
+    border-bottom: 0.5px solid #F2F4F5;
+}
+
+.address-infor {
+    flex: 0.5;
+}
+
+.address-btn-controll {
+    flex: 0.5;
+    justify-content: end;
+}
+
+.address-item {
+    border-bottom: 0.5px solid #F2F4F5;
+    margin: 20px 0px;
+}
+
+.dropdown-search {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.dropdown-toggle::after {
+    margin-left: -1.745em;
+}
+
+.custom-dropdown-menu {
+    width: 94%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.form-address > input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: fadein linear 0.2s;
+    display: block;
+}
+
+.modal-body {
+    --growth-from: 0.7;
+    --growth-to: 1;
+    background-color: var(--white-color);
+    margin: auto;
+    z-index: 3;
+    position: relative;
+    border-radius: 5px;
+    animation: growth linear 0.2s;
+    flex: 0.3;
+}

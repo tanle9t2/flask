@@ -1,0 +1,309 @@
+<div class="bg-white">
+    <nav class="navbar navbar-expand-sm container position-relative p-2">
+        <a class="navbar-brand m-0 col-md-3 text-center" href="/">
+            <img class="w-100 pb-2" src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png">
+        </a>
+
+        <form class="col-md-6">
+            <div class="input-group mw-md bg-white position-relative">
+                <input class="form-control p-4 border-1" id="search-desktop" autocomplete="off" type="text"
+                       placeholder="Search Book" name="keyword">
+                <button class="btn pt-1 pb-1 pr-3 pl-3 btn-primary icon-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div class="suggestion-list p-3">
+                    <div>
+                        <div></div>
+                        <div>
+                            <p class="">Sản phẩm</p>
+                            <div class="p-0 suggestion-list-book flex-wrap list-unstyled d-flex">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-md-3 d-flex justify-content-around p-0 cursor-pointer">
+            <div class="d-flex flex-column align-items-center bell ">
+                <i class="fa-regular fa-bell"></i>
+                <span>Thông báo</span>
+                <div class="sub-notification">
+                    <p class="sub-notification-header">
+                        <span> <i class="fa-regular fa-bell"></i></span>
+                        Thông báo
+                    </p>
+                    {% if current_user.is_authenticated %}
+                        <div class="sub-notification-menu text-center pl-4 pt-4 pr-4">
+                            <img src="{{ current_user.avt_url }}" style="margin-left: auto; margin-right: auto;"
+                                 width="100"
+                                 class="rounded-circle"/>
+                            <a class="nav-link text-info" href="/">
+                                Chào {{ current_user.full_name }}
+                            </a>
+                        </div>
+                        <div class="pl-4 pb-4 pr-4 ">
+                            <!--                        <button class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary btn-large" id="profileButton">-->
+                            <!--                            <a class="text-decoration-none text-white" href="javascript:void(0)">Hồ sơ</a>-->
+                            <!--                        </button>-->
+                            <button class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary btn-large">
+                                <a class="text-decoration-none text-white" href="/account/logout">Đăng xuất</a>
+                            </button>
+                        </div>
+                    {% else %}
+                        <div class="sub-notification-menu text-center pl-4 pt-4 pr-4">
+                            <span class="sub-notification-menu-icon"></span>
+                            <p class="pt-3 pb-3">Vui lòng đăng nhập để xem thông báo </p>
+                        </div>
+                        <div class="pl-4 pb-4 pr-4 ">
+                            <button class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary btn-large">
+                                <a class="text-decoration-none text-white" href="/account/login">Đăng nhập</a>
+                            </button>
+                            <button class="btn pt-1 pb-1 pr-3 pl-3 btn-primary-outline btn-large">
+                                <a class="text-decoration-none text-primary" href="/account/register">Đăng ký</a>
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <a class="d-flex cart-link position-relative flex-column align-items-center ">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>Giỏ hàng</span>
+                {% if current_user.is_authenticated %}
+                    {% if cart_items |length %}
+                        <span class="label-total text-white">{{ cart_items|length }}</span>
+                    {% endif %}
+                    <div class="menu-cart-item">
+                        <div class="menu-cart-item-header">
+                            <p class="p-3 m-0">
+                                <span><i class="fa-solid fa-cart-shopping"></i></span>
+                                <span class="sub-total">Giỏ hàng ({{ cart_items|length }})</span>
+                            </p>
+                        </div>
+                        {% if cart_items |length %}
+                            <ul class="sub-cart list-unstyled mt-3">
+                                {% for item in cart_items %}
+                                    <li id="{{ item.book_id }}" class="sub-cart-item d-flex p-3">
+                                        <img class="sub-cart-item-image"
+                                             src="{{ item.book.images[0].image_url }}">
+                                        <div class="sub-cart-item-detail pl-3">
+                                            <p class="sub-cart-item-title text-secondary">{{ item.book.title }}</p>
+                                            <p class="font-weight-bold m-0 text-primary">{{ item.book.price|currency("VND") }}
+                                                <span class="quantity">x {{ item.quantity }}</span></p>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                            <div class="d-flex p-3 align-items-center justify-content-between">
+                                <div class="group-price">
+                                    <p class="m-0">Tổng cộng</p>
+                                    <p class="text-primary sub-total-price">{{ total_price|currency("VND") }}</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary">
+                                        Xem giỏ hàng
+                                    </button>
+                                </div>
+                            </div>
+                        {% else %}
+                            <div class="text-center mt-5 mb-5">
+                                <div class="cart-item-null"></div>
+                                <p>Chưa có sản phẩm nào</p>
+                            </div>
+
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+            </a>
+            <div class="d-flex flex-column align-items-center account ">
+                <i class="fa-regular fa-user"></i>
+                <span>Tài khoản</span>
+                <div class="sub-login flex-column border-1">
+                    {% if current_user.is_authenticated %}
+                        <div class="col-6 text-center">
+                            <div class="profile-picture" style="width: 170px; height: 170px">
+                                <img src="{{ current_user.avt_url }}" alt="Profile Picture"
+                                     class="img-fluid profile-image rounded-circle">
+
+                            </div>
+                        </div>
+                        <!--                    <img src="{{ current_user.avt_url }}" style="margin-left: auto; margin-right: auto;" width="100"-->
+                        <!--                         class="rounded-circle"/>-->
+                        <a class="nav-link text-info" href="/">
+                            Chào {{ current_user.full_name }}
+                        </a>
+                        <button class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary btn-large" id="profileButton">
+                            <a class="text-decoration-none text-white" href="javascript:void(0)">Hồ sơ</a>
+                        </button>
+                        <button class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary btn-large">
+                            <a class="text-decoration-none text-white" href="/account/logout">Đăng xuất</a>
+                        </button>
+                    {% else %}
+
+                        <a class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary btn-large" href="/account/login">Đăng
+                            nhập</a>
+                        <a class="btn mb-3 pt-1 pb-1 pr-3 pl-3 btn-primary-outline btn-large" href="/account/register">Đăng
+                            ký </a>
+
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </nav>
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" style="float: right; font-size: 20px; cursor: pointer;">&times;</span>
+            <div class="card">
+                <div class="card-header bg-transparent">
+                    <h3 class="mb-0">Thông tin hồ sơ</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row icon-examples">
+                        <div class="col-12 d-flex">
+                            <!-- Left Side: Form to Edit Information -->
+                            <div class="col-6">
+                                <div class="profile-form">
+                                    <form>
+                                        <!-- Username Field -->
+                                        <div class="form-group">
+                                            <label for="username">Tên đăng nhập</label>
+                                            <div style="margin-left:16px; width:76%;">
+                                                <input type="text" id="username" class="form-control"
+                                                       value="{{ profile[0] }}" disabled>
+                                                <!-- Chỉ lấy 1 profile -->
+                                            </div>
+                                        </div>
+                                        <!-- Name Field -->
+                                        <div class="form-group">
+                                            <label for="first_name">Họ</label>
+                                            <div style="margin-left:17px; width:40%;">
+                                                <input type="text" id="first_name" class="form-control"
+                                                       value="{{ profile[1] }}">
+                                            </div>
+                                            <label for="last_name" style="margin-left: 25px;">Tên</label>
+                                            <div style="margin-left:17px; width:40%;">
+                                                <input type="text" id="last_name" class="form-control"
+                                                       value="{{ profile[2] }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+
+                                        </div>
+
+                                        <!-- Email Field -->
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <div style="margin:0 17px; width:79%;">
+                                                <input type="email" id="email" class="form-control"
+                                                       value="{{ profile[3] }}" disabled>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-primary edit-btn-email">Sửa
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Phone Field -->
+                                        <div class="form-group">
+                                            <label for="phone">Số điện thoại</label>
+                                            <div style="margin:0 17px; width:67%;">
+                                                <input type="text" id="phone" class="form-control"
+                                                       value="{{ profile[4] }}" disabled>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-primary edit-btn-phone">Sửa
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Gender Selection -->
+                                        <div class="form-group">
+                                            <label>Giới tính</label><br>
+                                            <div style="display:flex;margin:0 40px;">
+                                                <input type="radio" id="male" name="gender" value="Nam"
+                                                       {% if profile.is_male %}checked{% endif %}>
+                                                <label for="male">Nam</label>
+                                            </div>
+                                            <div style="display:flex;margin:0 40px;">
+                                                <input type="radio" id="female" name="gender" value="Nữ"
+                                                       {% if profile.is_female %}checked{% endif %}>
+                                                <label for="female">Nữ</label>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- Date of Birth Fields -->
+                                        <div class="form-group">
+                                            <label for="dob">Ngày sinh</label><br>
+                                            <div style="display:flex; margin:0 36px;">
+                                                <!-- Select for Day -->
+                                                <select id="day" class="form-control d-inline"
+                                                        style="width: 120px; max-height: 100px; overflow-y: auto;">
+                                                    <option value="" disabled>Ngày</option>
+                                                    {% for i in range(1, 32) %}
+                                                        <option value="{{ i }}"
+                                                                {% if i== profile.day %}selected{% endif %}>{{ i }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+
+                                                <!-- Select for Month -->
+                                                <select id="month" class="form-control d-inline"
+                                                        style="width: 120px; max-height: 100px; overflow-y: auto;">
+                                                    <option value="" disabled>Tháng</option>
+                                                    {% for i in range(1, 13) %}
+                                                        <option value="{{ i }}"
+                                                                {% if i== profile.month %}selected{% endif %}>{{ i }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+
+                                                <!-- Select for Year -->
+                                                <select id="year" class="form-control d-inline"
+                                                        style="width: 120px; max-height: 100px; overflow-y: auto;">
+                                                    <option value="" disabled>Năm</option>
+                                                    {% for i in range(1900, current_year + 1) %}
+                                                        <option value="{{ i }}"
+                                                                {% if i== profile.year %}selected{% endif %}>{{ i }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <!-- Save Button -->
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-primary btn-save"
+                                                    style="padding:10px 50px">Lưu
+                                            </button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                            <!-- Right Side: Profile Picture and Edit -->
+                            <div class="col-6 text-center">
+                                <div class="profile-picture">
+                                    <img src="{{ profile[5] }}" alt="Profile Picture"
+                                         class="img-fluid profile-image rounded-circle" id="profileImage">
+
+                                </div>
+                                <div class="image-upload" style="margin-top: 30px">
+                                    <input type="file" id="fileUpload" accept="image/*"
+                                           onchange="previewImage(event)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

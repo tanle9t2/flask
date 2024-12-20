@@ -1,0 +1,13 @@
+.book-item {
+    width: 100px !important;
+}
+
+.btn-disable {
+    cursor: default !important;
+    background-color: grey !important;
+}
+
+.btn-disable:hover {
+    transform: none !important;
+    background-color: grey !important;
+}

@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+    <meta name="author" content="Creative Tim">
+    <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+    <link rel="shortcut icon" href="https://cdn0.fahasa.com/media/favicon/default/favicon4.ico">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/argon-dashboard/2.0.4/css/nucleo-icons.min.css"
+          integrity="sha512-GhQLa5q131bN6G1TOG7zviS79WU8/18DE5WLS7rHN+EOQ0G3BDJfV6+/g680Cq9ocHU+SLKvO9gFnS0NuhZXGg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
+          integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <!-- Argon CSS -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/argon.css') }}" type="text/css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminStatistic.css') }}">
+</head>
+
+<body>
+<!-- Sidenav -->
+<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  align-items-center">
+            <a class="navbar-brand" href="javascript:void(0)">
+                <img src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
+                     class="navbar-brand-img" alt="...">
+            </a>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Nav items -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/">
+                            <i class="ni ni-chart-pie-35 text-primary"></i>
+                            <span class="nav-link-text">Trang chủ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/book-manager">
+                            <i class="ni ni-tv-2 text-primary"></i>
+                            <span class="nav-link-text">Quản lí sách</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/statistic-revenue">
+                            <i class="ni ni-planet text-orange"></i>
+                            <span class="nav-link-text">Thống kê doanh thu</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/statistic-frequency">
+                            <i class="ni ni-pin-3 text-primary"></i>
+                            <span class="nav-link-text">Thống kê tần suất</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/account-manager">
+                            <i class="ni ni-single-02 text-yellow"></i>
+                            <span class="nav-link-text">Quản lí tài khoản</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/bookgerne-manager">
+                            <i class="ni ni-bullet-list-67 text-default"></i>
+                            <span class="nav-link-text">Quản lí thể loại</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/profile">
+                            <i class="ni ni-key-25 text-info"></i>
+                            <span class="nav-link-text">Hồ sơ</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="register.html">
+                            <i class="ni ni-circle-08 text-pink"></i>
+                            <span class="nav-link-text">Register</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="upgrade.html">
+                            <i class="ni ni-send text-dark"></i>
+                            <span class="nav-link-text">Upgrade</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+<!-- Main content -->
+<div class="main-content" id="panel">
+    <!-- Topnav -->
+    <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav align-items-center  ml-md-auto ">
+                    <li class="nav-item d-xl-none">
+                        <!-- Sidenav toggler -->
+                        <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin"
+                             data-target="#sidenav-main">
+                            <div class="sidenav-toggler-inner">
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                                <i class="sidenav-toggler-line"></i>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item d-sm-none">
+                        <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+                            <i class="ni ni-zoom-split-in"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="ni ni-bell-55"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                            <!-- Dropdown header -->
+                            <div class="px-3 py-3">
+                                <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong>
+                                    notifications.
+                                </h6>
+                            </div>
+                            <!-- List group -->
+                            <div class="list-group list-group-flush">
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-1.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>2 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-2.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>3 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-3.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>5 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">Your posts have been liked a lot.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-4.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>2 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#!" class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <!-- Avatar -->
+                                            <img alt="Image placeholder" src="../assets/img/theme/team-5.jpg"
+                                                 class="avatar rounded-circle">
+                                        </div>
+                                        <div class="col ml--2">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h4 class="mb-0 text-sm">John Snow</h4>
+                                                </div>
+                                                <div class="text-right text-muted">
+                                                    <small>3 hrs ago</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <!-- View all -->
+                            <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View
+                                all</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="ni ni-ungroup"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
+                            <div class="row shortcuts px-4">
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
+                      <i class="ni ni-calendar-grid-58"></i>
+                    </span>
+                                    <small>Calendar</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
+                      <i class="ni ni-email-83"></i>
+                    </span>
+                                    <small>Email</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
+                      <i class="ni ni-credit-card"></i>
+                    </span>
+                                    <small>Payments</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
+                      <i class="ni ni-books"></i>
+                    </span>
+                                    <small>Reports</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
+                      <i class="ni ni-pin-3"></i>
+                    </span>
+                                    <small>Maps</small>
+                                </a>
+                                <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
+                      <i class="ni ni-basket"></i>
+                    </span>
+                                    <small>Shop</small>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false">
+                            <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder"
+                         src="{{ current_user.avt_url }}">
+                  </span>
+                                <div class="media-body  ml-2  d-none d-lg-block">
+                                    <span class="mb-0 text-sm  font-weight-bold">{{ current_user.full_name }}</span>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu  dropdown-menu-right ">
+                            <form action="/account/admin-login" method="POST">
+                                {% if current_user.is_authenticated %}
+                                <div class="dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Chào {{ current_user.full_name }}</h6>
+                                </div>
+                                <a href="/admin/profile" class="dropdown-item">
+                                    <i class="ni ni-single-02"></i>
+                                    <span>Hồ sơ</span>
+                                </a>
+                                <a href="/account/admin-logout" class="dropdown-item">
+                                    <i class="ni ni-user-run"></i>
+                                    <span>Đăng xuất</span>
+                                </a>
+                                {% else %}
+                                {% endif %}
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <div class="header bg-primary pb-6">
+        <div class="container-fluid">
+            <div class="header-body">
+                <div class="row align-items-center py-4" style="display: flex; width: 100%;">
+                    <!-- Div 1: 23% -->
+                    <div class="col-lg-6 col-7" style="flex: 0 0 23%; max-width: 23%;">
+                        <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                <li class="breadcrumb-item"><a href="/admin/statistic-revenue"><i
+                                        class="fas fa-home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="/admin/statistic-revenue">Thống kê doanh thu</a>
+                                </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+
+                    <!-- Div 2: 59% -->
+                    <div class="col-lg-6 col-7" style="flex: 0 0 40%; max-width: 40%;padding:0;">
+                        <form class="col-lg-6 col-7" style="display: flex; gap: 10px; align-items: center;padding:0;">
+
+                            <!--                            <div style="flex: 1;">-->
+                            <!--                                <input type="date" name="from_date" style="width: 100%; box-sizing: border-box;">-->
+                            <!--                            </div>-->
+                            <!--                            <div style="flex: 1;">-->
+                            <!--                                <input type="date" name="to_date" style="width: 100%; box-sizing: border-box;">-->
+                            <!--                            </div>-->
+                            <div style="flex: 1;">
+                                <input type="month" name="selected_month" style="width: 100%; box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <input type="submit" value="Xác nhận" class="btn btn-neutral"
+                                       style="cursor: pointer;background-color: #2196F3; color: white">
+                            </div>
+                            <div class="col-lg-6 col-5 text-right" style="flex: 1;padding:0;display:flex;">
+                                <a href="#" class="btn btn-neutral" id="statistic-table-check">Bảng</a>
+                                <a href="#" class="btn btn-neutral" id="statistic-chart-check">Biểu đồ</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-6 col-7" style="flex: 0 0 35%; max-width: 35%;padding:0;">
+                        <form class="col-lg-6 col-7" style="display: flex; gap: 10px; align-items: center;padding:0;" id="statisticForm">
+                            <div style="flex: 1;">
+                                <input type="number" min="2000" name="year" placeholder="Nhập năm"
+                                       style="box-sizing: border-box;">
+                            </div>
+                            <div>
+                                <input type="submit" value="Xác nhận" class="btn btn-neutral"
+                                       style="cursor: pointer;background-color: #2196F3; color: white">
+                            </div>
+                            <!--                            <div style="flex: 1;">-->
+                            <!--                                <input type="text" name="kw" placeholder="Nhập từ khóa"-->
+                            <!--                                       style="box-sizing: border-box;">-->
+                            <!--                            </div>-->
+                            <div class="col-lg-6 col-5 text-right" style="flex: 1;padding:0;display:flex;">
+                                <a href="#" class="btn btn-neutral" id="statistic-table-month-check">Bảng</a>
+                                <a href="#" class="btn btn-neutral" id="statistic-chart-month-check">Biểu đồ</a>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    <!--                    &lt;!&ndash; Div 3: 18% &ndash;&gt;-->
+                    <!--                    <div class="col-lg-6 col-5 text-right" style="flex: 0 0 18%; max-width: 18%;">-->
+                    <!--                        -->
+                    <!--                        <a href="#" class="btn btn-neutral" id="statistic-table-check">Bảng</a>-->
+                    <!--                        <a href="#" class="btn btn-neutral" id="statistic-chart-check">Biểu đồ</a>-->
+                    <!--                    </div>-->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6" id="statistic-table" style="display: block;">
+        <div class="row justify-content-center">
+            <div class=" col ">
+                <div class="card" style="margin-bottom: 0">
+                    <div class="card-header bg-transparent" style="display: flex; justify-content: space-between">
+                        <h3 class="mb-0">Thống kê dạng bảng</h3>
+                        <ul class="pagination" style="margin: 0; display: flex; justify-content: center;">
+                            <!-- Nút Previous -->
+                            <li class="page-item{% if books['current_page'] == 1 %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="?page={{ books['current_page'] - 1 }}{% if request.args.get('kw') %}&kw={{ request.args.get('kw') }}{% endif %}{% if request.args.get('selected_month') %}&selected_month={{ request.args.get('selected_month') }}{% endif %}"
+                                   tabindex="-1">
+                                    <i class="fas fa-angle-left"></i>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                            </li>
+
+                            <!-- Hiển thị các trang -->
+                            {% for page in books['pages'] %}
+                            <li class="page-item{% if page == books['current_page'] %} active {% endif %}">
+                                <a class="page-link"
+                                   href="?page={{ page }}{% if request.args.get('kw') %}&kw={{ request.args.get('kw') }}{% endif %}{% if request.args.get('selected_month') %}&selected_month={{ request.args.get('selected_month') }}{% endif %}">
+                                    {{ page }}
+                                </a>
+                            </li>
+                            {% endfor %}
+
+                            <!-- Nút Next -->
+                            <li class="page-item{% if books['current_page'] == books['total_page'] %} disabled {% endif %}">
+                                <a class="page-link"
+                                   href="?page={{ books['current_page'] + 1 }}{% if request.args.get('kw') %}&kw={{ request.args.get('kw') }}{% endif %}{% if request.args.get('selected_month') %}&selected_month={{ request.args.get('selected_month') }}{% endif %}">
+                                    <i class="fas fa-angle-right"></i>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="card-body" style="padding-top: 0">
+                        <div class="row icon-examples">
+                            <div class="col-12">
+                                <div class="table-responsive"
+                                     style="max-height: 335px; overflow-y: auto; border: 1px solid #adb5bd; border-radius: 5px;">
+                                    <table class="table align-items-center table-flush"
+                                           style="border-collapse: collapse; width: 100%; border: 1px solid #adb5bd;">
+                                        <thead class="thead-light" style="position: sticky; top: 0; z-index: 1;">
+                                        <tr>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Ma the loai
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="name"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Ten the loai
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Doanh thu
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                        {% for s in stats %}
+                                        <tr>
+                                            <th scope="row" style="border: 1px solid #adb5bd;">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body text-center">
+                                                        <span class="name mb-0 text-sm text-center">{{s[0]}}</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="budget text-center" style="border: 1px solid #adb5bd;">
+                                                {{s[1]}}
+                                            </td>
+                                            <td style="border: 1px solid #adb5bd;">
+                                                        <span class="badge badge-dot mr-4 text-center w-100">
+                                                        <span class="status text-center">{{ s[2] if s[2] is not none else 0 }} VNĐ</span>
+                                                        </span>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <div class="d-flex px-5 py-4 justify-content-between "
+                                     style="padding-bottom: 5px !important">
+                                    <div class="font-weight-bolder display-4">
+                                        Tổng doanh thu:
+                                    </div>
+                                    <div class="font-weight-bolder display-4">{{ total_revenue }} VNĐ</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt--6" style="display: none;" id="statistic-chart">
+        <div class="row justify-content-center">
+            <div class=" col ">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h3 class="mb-0">Thống kê dạng biểu đồ</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart" height="380" width="800"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt--6" id="statistic-table-month" style="display: none;">
+        <div class="row justify-content-center">
+            <div class=" col ">
+                <div class="card" style="margin-bottom: 0">
+                    <div class="card-header bg-transparent" style="display: flex; justify-content: space-between">
+                        <h3 class="mb-0">Thống kê dạng bảng</h3>
+
+                    </div>
+                    <div class="card-body" style="padding-top: 0">
+                        <div class="row icon-examples">
+                            <div class="col-12">
+                                <div class="table-responsive"
+                                     style=" overflow-y: auto; border: 1px solid #adb5bd; border-radius: 5px;">
+                                    <table class="table align-items-center table-flush"
+                                           style="border-collapse: collapse; width: 100%; border: 1px solid #adb5bd;">
+                                        <thead class="thead-light" style="position: sticky; top: 0; z-index: 1;">
+                                        <tr>
+                                            <th scope="col" class="sort text-center" data-sort="budget"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Thang
+                                            </th>
+                                            <th scope="col" class="sort text-center" data-sort="name"
+                                                style="border: 1px solid #adb5bd;background-color: #c92127; color: #ffffff;">
+                                                Doanh thu
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list">
+                                        {% for s in stats_month %}
+                                        <tr>
+                                            <th scope="row" style="border: 1px solid #adb5bd;">
+                                                <div class="media align-items-center">
+                                                    <div class="media-body text-center">
+                                                        <span class="name mb-0 text-sm text-center">{{s[0]}}</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td style="border: 1px solid #adb5bd;">
+                                                        <span class="badge badge-dot mr-4 text-center w-100">
+                                                        <span class="status text-center">{{ s[1] if s[1] is not none else 0 }} VNĐ</span>
+                                                        </span>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!--                                                                <div class="d-flex px-5 py-4 justify-content-between "-->
+                                <!--                                                                     style="padding-bottom: 5px !important">-->
+                                <!--                                                                    <div class="font-weight-bolder display-4">-->
+                                <!--                                                                        Tổng doanh thu:-->
+                                <!--                                                                    </div>-->
+                                <!--                                                                    <div class="font-weight-bolder display-4">{{ total_revenue }} VNĐ</div>-->
+                                <!--                                                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt--6" style="display: none;" id="statistic-chart-month">
+        <div class="row justify-content-center">
+            <div class=" col ">
+                <div class="card">
+                    <div class="card-header bg-transparent">
+                        <h3 class="mb-0">Thống kê dạng biểu đồ</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="myChart-month" height="380" width="800"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Lấy các phần tử cần thiết từ DOM
+    const statisticTableCheck = document.getElementById("statistic-table-check");
+    const statisticChartCheck = document.getElementById("statistic-chart-check");
+    const statisticTable = document.getElementById("statistic-table");
+    const statisticChart = document.getElementById("statistic-chart");
+    const ctx = document.getElementById('myChart'); // Canvas của biểu đồ
+
+    const statisticTableMonthCheck = document.getElementById("statistic-table-month-check");
+    const statisticChartMonthCheck = document.getElementById("statistic-chart-month-check");
+    const statisticTableMonth = document.getElementById("statistic-table-month");
+    const statisticChartMonth = document.getElementById("statistic-chart-month");
+    const ctxm = document.getElementById('myChart-month'); // Canvas của biểu đồ
+
+    // Hiển thị bảng và ẩn biểu đồ khi chọn "Xem bảng"
+    statisticTableCheck.addEventListener("click", () => {
+        statisticTable.style.display = "block";
+        statisticChart.style.display = "none";
+        statisticTableMonth.style.display = "none";
+        statisticChartMonth.style.display = "none";
+    });
+
+    statisticTableMonthCheck.addEventListener("click", () => {
+        statisticTableMonth.style.display = "block";
+        statisticChartMonth.style.display = "none";
+        statisticTable.style.display = "none";
+        statisticChart.style.display = "none";
+    });
+
+    // Hiển thị biểu đồ và ẩn bảng khi chọn "Xem biểu đồ"
+    statisticChartCheck.addEventListener("click", () => {
+        statisticTable.style.display = "none";
+        statisticChart.style.display = "block";
+        statisticTableMonth.style.display = "none";
+        statisticChartMonth.style.display = "none";
+
+        // Kiểm tra và xóa biểu đồ cũ nếu tồn tại
+        if (window.myChartInstance) {
+            window.myChartInstance.destroy();
+        }
+
+        // Dữ liệu từ full_stats (được truyền từ server cho biểu đồ)
+        let data = [];
+        let labels = [];
+
+        {% for s in full_stats %}
+        labels.push('{{ s[1] }}');  // Tên thể loại
+        // Kiểm tra nếu giá trị doanh thu là None và thay thế bằng 0
+        data.push({{ s[2] if s[2] is not none else 0 }}); // Doanh thu (thay None bằng 0)
+        {% endfor %}
+
+        // Kiểm tra dữ liệu có hợp lệ không
+        if (labels.length === 0 || data.length === 0) {
+            alert("Không có dữ liệu để hiển thị biểu đồ!");
+            return;
+        }
+
+        // Tạo biểu đồ mới
+        window.myChartInstance = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Doanh thu',
+            data: data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 2, // Độ rộng viền tăng lên để làm nổi bật các phần
+            hoverOffset: 10 // Tạo hiệu ứng "phóng to" khi hover
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'left',  // Đặt mục lục ở trên
+                align: 'center',  // Căn giữa mục lục
+                labels: {
+                    padding: 20,  // Khoảng cách giữa các mục lục
+                    font: {
+                        size: 14,  // Kích thước chữ mục lục lớn hơn
+                        weight: 'bold', // In đậm mục lục
+                        family: "'Poppins', sans-serif" // Chọn font chữ đẹp, hiện đại
+                    },
+                    color: '#333'  // Màu chữ của mục lục
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        // Định dạng tooltip để hiển thị giá trị và đơn vị
+                        return `${tooltipItem.label}: ${tooltipItem.raw.toLocaleString()} VNĐ`;
+                    }
+                },
+                backgroundColor: 'rgba(0, 0, 0, 0.7)', // Nền tooltip tối để dễ nhìn
+                titleFont: { size: 16, weight: 'bold' },
+                bodyFont: { size: 14 },
+                borderWidth: 1,
+                borderColor: '#fff'
+            }
+        },
+        layout: {
+            padding: {
+                top: 40,    // Tăng khoảng cách trên để tạo không gian
+                bottom: 40, // Tăng khoảng cách dưới
+                left: 30,   // Khoảng cách trái
+                right: 30   // Khoảng cách phải
+            }
+        },
+        animation: {
+            duration: 1000, // Thời gian animation để biểu đồ thêm mượt mà
+            easing: 'easeOutBounce' // Hiệu ứng bounce khi biểu đồ load
+        }
+    }
+});
+
+    });
+
+
+
+
+    // Hiển thị biểu đồ và ẩn bảng khi chọn "Xem biểu đồ"
+    statisticChartMonthCheck.addEventListener("click", () => {
+        statisticTableMonth.style.display = "none";
+        statisticChartMonth.style.display = "block";
+        statisticTable.style.display = "none";
+        statisticChart.style.display = "none";
+
+
+        // Kiểm tra và xóa biểu đồ cũ nếu tồn tại
+        if (window.myChartInstance) {
+            window.myChartInstance.destroy();
+        }
+
+        // Dữ liệu từ full_stats_month (được truyền từ server cho biểu đồ)
+        let data = [];
+        let labels = [];
+
+        {% for s in full_stats_month %}
+        labels.push({{ s[0] }});
+        data.push({{ s[1] if s[1] is not none else 0 }});
+        {% endfor %}
+
+        // Kiểm tra dữ liệu có hợp lệ không
+        if (labels.length === 0 || data.length === 0) {
+            alert("Không có dữ liệu để hiển thị biểu đồ!");
+            return;
+        }
+
+        // Tạo biểu đồ mới
+window.myChartInstance = new Chart(ctxm, {
+    type: 'bar',
+    data: {
+        labels: labels, // Dữ liệu nhãn cho trục X
+        datasets: [{
+            label: ' Doanh thu',
+            data: data, // Dữ liệu cho trục Y
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.8)',
+                'rgba(54, 162, 235, 0.8)',
+                'rgba(255, 206, 86, 0.8)',
+                'rgba(75, 192, 192, 0.8)',
+                'rgba(153, 102, 255, 0.8)',
+                'rgba(255, 159, 64, 0.8)',
+                'rgba(201, 203, 207, 0.8)' // Thêm màu để tăng đa dạng
+            ],
+            borderColor: 'rgba(0, 0, 0, 0.2)', // Viền mờ để làm mềm biểu đồ
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true, // Biểu đồ sẽ tự điều chỉnh khi thay đổi kích thước
+        maintainAspectRatio: false, // Không giữ tỷ lệ cố định
+        plugins: {
+            legend: {
+                position: 'top', // Mục lục đặt ở trên
+                labels: {
+                    font: {
+                        size: 18, // Kích thước chữ lớn hơn để dễ đọc
+                        family: "'Poppins', sans-serif", // Font chữ hiện đại
+                        weight: 'bold'
+                    },
+                    color: '#333', // Màu chữ của mục lục
+                    padding: 0 // Khoảng cách giữa các mục trong mục lục
+                }
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        // Format tooltip để hiển thị giá trị và đơn vị
+                        return `Doanh thu: ${tooltipItem.raw.toLocaleString()} VNĐ`;
+                    }
+                },
+                backgroundColor: 'rgba(0, 0, 0, 0.8)', // Nền đen mờ
+                titleFont: { size: 16, weight: 'bold' },
+                bodyFont: { size: 14 },
+                borderWidth: 1,
+                borderColor: '#fff'
+            }
+        },
+        scales: {
+            x: {
+                grid: {
+                    display: false // Tắt lưới ngang trên trục X để làm rõ biểu đồ
+                },
+                ticks: {
+                    font: {
+                        size: 18,
+                        family: "'Poppins', sans-serif",
+                        weight: 'bold'
+                    },
+                    color: '#333'
+                },
+                title: {
+                    display: true,
+                    text: 'Tháng', // Tiêu đề cho trục X
+                    font: {
+                        size: 14,
+                        family: "'Poppins', sans-serif",
+                        weight: 'bold'
+                    }
+                }
+            },
+            y: {
+    grid: {
+        color: 'rgba(0, 0, 0, 0.3)', // Màu lưới nhạt để không làm rối biểu đồ
+        borderDash: [5, 5] // Lưới dạng nét đứt
+    },
+    ticks: {
+        font: {
+            size: 12,
+            family: "'Poppins', sans-serif",
+            weight: 'bold'
+        },
+        color: '#333',
+        callback: function(value) {
+            return `${value.toLocaleString()} VNĐ`; // Thêm đơn vị cho trục Y
+        },
+        stepSize: 500000,
+        beginAtZero: true
+    },
+    title: {
+        display: true,
+        text: 'Doanh thu (VNĐ)',
+        font: {
+            size: 14,
+            family: "'Poppins', sans-serif",
+            weight: 'bold'
+        }
+    }
+}
+
+        },
+        layout: {
+            padding: {
+                left: 20,
+                right: 20
+            }
+
+        },
+        animation: {
+            duration: 1500, // Thời gian hoạt ảnh dài hơn để mượt mà
+            easing: 'easeOutBounce' // Hiệu ứng bounce để biểu đồ sống động hơn
+        }
+    }
+});
+
+
+    });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='js/adminStatistic.js') }}"></script>
+
+</body>
+</html>

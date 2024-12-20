@@ -1,0 +1,19 @@
+.product-qty-status {
+    background-color: #85ff80;
+    border: 1px solid var(--black-color);
+    border-radius: 5px;
+    color: var(--black-color);
+}
+
+.product-qty-status-shortage {
+    background-color: orangered;
+    color: var(--white-color);
+}
+
+.table th, .table td {
+    padding: 0.5rem 1rem !important;
+}
+
+.table-header {
+    color: var(--black-color) !important;
+}

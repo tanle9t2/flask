@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css"
+          crossorigin="anonymous"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="keywords" content="html, html5, web, css, js">
+    <meta name="description" content="GPHUCDEPZAI">
+    <meta http-equiv="refresh" content="1800">
+    <link href="https://cdn0.fahasa.com/media/favicon/default/favicon4.ico" rel="shortcut icon">
+    <title>Đăng kí</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="wow.min.js"></script>
+</head>
+
+<body>
+<div class="main-wrapper login-body">
+    <div>
+        <div class="row">
+            <div class="login-wrap">
+                <div class="login-sec">
+                    <div>
+                        <img src="https://res.cloudinary.com/duk7gxwvc/image/upload/v1732125348/385-3855617_click-here-for-flyer-kids-reading-reading-week-removebg-preview_asryy5.png" alt="Login Image">
+                    </div>
+                </div>
+            </div>
+            <div class="login-wrap-bg">
+                <div class="login-wrapper">
+                    <div class="loginbox">
+                        <div class="login-right">
+                            <div class="login-right-wrap">
+                                <div class="account-logo row">
+                                    <a href="javascript:;">
+                                        <img class="img1"
+                                             src="https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/fahasa-logo.png"
+                                             alt="">
+                                    </a>
+                                </div>
+                                <h2 style="color: #5a5a5a;">Đăng ký</h2>
+                                <form class="row" method="post" action="{{ url_for('account.register_process') }}">
+                                    <div class="form-group-1 appoinment-body-1">
+                                        <div class="form-group appoinment-body-1">
+                                            <label for="first_name">
+                                                <font>Họ</font>
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input class="form-control-all form-control-ho-email-pass" type="text"
+                                                   id="first_name" name="first_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group-2 appoinment-body-1">
+                                        <div class="form-group appoinment-body-1">
+                                            <label for="last_name">
+                                                <font>Tên</font>
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input class="form-control-all form-control-ten-sdt-checkpass" type="text"
+                                                   id="last_name" name="last_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group-1 appoinment-body-1">
+                                        <div class="form-group appoinment-body-1">
+                                            <label for="username">
+                                                <font>Tên đăng nhập</font>
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input class="form-control-all form-control-ho-email-pass" id="username"
+                                                   name="username" type="text">
+                                        </div>
+                                    </div>
+                                    <div class="form-group-2 appoinment-body-1">
+                                        <div class="form-group appoinment-body-1">
+                                            <label for="email">
+                                                <font>Email</font>
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                        </div>
+                                        <div>
+                                            <input class="form-control-all form-control-ten-sdt-checkpass" type="email"
+                                                   id="email" name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group-1 appoinment-body-1">
+                                        <div class="form-group appoinment-body-1">
+                                            <label for="pass">
+                                                <font>Mật khẩu</font>
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="box">
+                                            <input class="form-control-all form-control-ho-email-pass" id="pass"
+                                                   name="password" type="password">
+                                            <div class="toggle" id="toggle" onclick="showPass()"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group-2 appoinment-body-1">
+                                        <div class="form-group appoinment-body-1">
+                                            <label for="confirm">
+                                                <font>Xác nhận mật khẩu</font>
+                                                <span style="color: red;">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="box">
+                                            <input class="form-control-all form-control-ten-sdt-checkpass" id="confirm"
+                                                   name="confirm" type="password">
+                                            <div class="toggle" id="toggle1" onclick="showConfirm()"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container-checkpass">
+                                        <div class="forgotpass">
+                                            <div class="remember-me">
+                                                <label class="custom_check">
+                                                    <input type="checkbox" name="radio">
+                                                    <font>Tôi đồng ý với tất cả chính sách</font>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% if err_msg %}
+                                        <div class="checkpass" style="margin-bottom: 15px">
+                                            <div class="remember-me">
+                                                <label class="custom_check">
+                                                    <font style="color: red; font-weight: 600;">{{err_msg}}</font>
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+
+                                    <div class="form-group login-btn">
+                                        <a href="/account/login">
+                                            <button class="btn-primary" type="submit">Đăng ký</button>
+                                        </a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    const pass = document.getElementById('pass');
+    const toggle = document.getElementById('toggle');
+
+    function showPass() {
+        if (pass.type === 'password') {
+            pass.setAttribute('type', 'text');
+            toggle.classList.add('hide')
+        }
+        else {
+            pass.setAttribute('type', 'password');
+            toggle.classList.remove('hide')
+        }
+    }
+
+    const confirm = document.getElementById('confirm');
+    const toggle1 = document.getElementById('toggle1');
+
+    function showConfirm() {
+        if (confirm.type === 'password') {
+            confirm.setAttribute('type', 'text');
+            toggle1.classList.add('hide')
+        }
+        else {
+            confirm.setAttribute('type', 'password');
+            toggle1.classList.remove('hide')
+        }
+    }
+</script>
+</html>

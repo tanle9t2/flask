@@ -1,0 +1,26 @@
+.modal {
+    overflow-y: scroll;
+}
+
+.modal-body {
+    /*overflow-y: scroll;*/
+}
+
+.invoice-header {
+    background-color: #c92127;
+    color: white;
+    padding: 10px;
+}
+
+.invoice-header h5 {
+    margin: 0;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+.btn-print, .btn-email {
+    background-color: #c92127;
+    margin-right: 5px;
+}

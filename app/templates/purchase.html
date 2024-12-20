@@ -1,0 +1,314 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/purchase.css') }}">
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/purchase.js') }}"></script>
+    <script>
+        var is_success = {{ is_success|tojson }}
+        if (is_success) {
+            if (is_success === "00")
+                showToast("Thanh toán thành công", false)
+            else
+                showToast("Thanh toán thất bại", true)
+        }
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="my-bg-color pt-3 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <div class="home-section py-0 rounded" id="home_category_section">
+                        <div class="d-flex justify-content-around home_category_heading">
+                            <div class="home_category_item active">Tất cả</div>
+                            <div id="6" class="home_category_item">Chờ thanh toán</div>
+                            <div id="3" class="home_category_item">Vận chuyển</div>
+                            <div id="4" class="home_category_item">Hoàn thành</div>
+                            <div id="5" class="home_category_item">Đã hủy</div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 order-area p-0 rounded">
+                        <ul class="list-unstyled m-0">
+                            {% if order|length %}
+                                {% for item in order %}
+                                    <li id="{{ item.order_id }}" class="item-bg-color mt-3 mb-3 p-3">
+                                        <div class="purchase-header pb-3">
+                                            <p class="text-right m-0">
+                                                {% if item.status.id == 4 %}
+                                                    <span style="color: #26aa99">Giao hàng thành công</span>
+                                                {% endif %}
+                                                <span class="separator"> | </span>
+                                                <span class="text-primary order-status">{{ item.status.name }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="purchase-list">
+                                            {% for od in item.order_detail %}
+                                                <div class="purchase-item">
+                                                    <div class="item-infor d-flex align-items-center">
+                                                        <div class="item-infor-image">
+                                                            <img class="w-100"
+                                                                 src="{{ od.book.images[0].image_url }}">
+                                                        </div>
+                                                        <div class="item-infor-detail">
+                                                            <p>{{ od.book.title }}</p>
+                                                            <p>x{{ od.quantity }}</p>
+                                                        </div>
+                                                        <div class="item-infor-price text-center">
+                                                            <span class="text-secondary text-decoration-line-through">{{ od.book.price|currency }}</span>
+                                                            <span class="text-primary">{{ od.book.price|currency }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+
+                                        </div>
+                                        <div class="purchase-controll pb-2 text-right">
+                                            <p>Thành tiền: <span
+                                                    class="text-primary">{{ item.total_amount|currency("VND") }}</span>
+                                            </p>
+                                            <div class="group-button">
+                                                {% if item.status.name == 'Đã thanh toán' or item.status.name == 'Đang giao hàng' %}
+                                                    <button disabled
+                                                            onclick="handleReBuy([{{ item.order_detail | map(attribute='book.book_id') | join(', ') }}])"
+                                                            class="btn btn-rebuy btn-primary btn-large">Mua lại
+                                                    </button>
+                                                {% elif item.status.name == 'Đã hoàn thành' or item.status.name == 'Đã hủy' %}
+                                                    <button onclick="handleReBuy([{{ item.order_detail | map(attribute='book.book_id') | join(', ') }}])"
+                                                            class="btn btn-rebuy btn-primary btn-large">Mua lại
+                                                    </button>
+                                                {% elif item.status.name == 'Đang chờ thanh toán' %}
+                                                    <span class="text-primary">Vui lòng thanh toán trong vòng 48 giờ</span>
+                                                    <button onclick="handleRePayment([{{ item.order_id }}])"
+                                                            class="btn btn-repayment btn-primary btn-large">Mua lại
+                                                    </button>
+                                                {% else %}
+                                                    <button
+                                                            class="btn btn-cancellation btn-primary btn-large">Yêu cầu
+                                                        hủy
+                                                    </button>
+                                                    <div class="modal">
+                                                        <div class="overlay"></div>
+                                                        <div class="modal-body modal-reason item-bg-color">
+                                                            <div class="header d-flex">
+                                                                <p class="flex-fill text-center font-weight-bold">Chọn
+                                                                    lí do hủy</p>
+                                                                <span class="text-secondary cursor-pointer close-form">
+                                                                    <i class="fa-solid fa-x"></i>
+                                                                </span>
+                                                            </div>
+                                                            <div class="">
+                                                                <ul class="reason-list list-unstyled">
+                                                                    <li class="reason-item d-flex align-items-center">
+                                                                        <div class="reason-item-tick ">
+                                                                            <svg data-v-05e59da4="" width="12"
+                                                                                 height="12" viewBox="0 0 12 12"
+                                                                                 fill="none"
+                                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                                <path class="tick-outline"
+                                                                                      data-v-05e59da4=""
+                                                                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                                                                      fill="#ffff" stroke="#D70018"
+                                                                                      stroke-width="1.5"></path>
+                                                                                <path data-v-05e59da4=""
+                                                                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                                                                      stroke="white"
+                                                                                      stroke-linecap="round"
+                                                                                      stroke-linejoin="round"></path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <p class="m-0 reason-item-text font-weight-bold">
+                                                                            Tui muốn mua sản phẩm khác</p>
+                                                                    </li>
+                                                                    <li class="reason-item d-flex align-items-center">
+                                                                        <div class="reason-item-tick">
+                                                                            <svg data-v-05e59da4="" width="12"
+                                                                                 height="12" viewBox="0 0 12 12"
+                                                                                 fill="none"
+                                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                                <path class="tick-outline"
+                                                                                      data-v-05e59da4=""
+                                                                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                                                                      fill="#ffff" stroke="#D70018"
+                                                                                      stroke-width="1.5"></path>
+                                                                                <path data-v-05e59da4=""
+                                                                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                                                                      stroke="white"
+                                                                                      stroke-linecap="round"
+                                                                                      stroke-linejoin="round"></path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <p class="m-0 reason-item-text font-weight-bold">
+                                                                            Muốn thay đổi địa chỉ</p>
+
+                                                                    </li>
+                                                                    <li class="reason-item d-flex align-items-center">
+                                                                        <div class="reason-item-tick ">
+                                                                            <svg data-v-05e59da4="" width="12"
+                                                                                 height="12" viewBox="0 0 12 12"
+                                                                                 fill="none"
+                                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                                <path class="tick-outline"
+                                                                                      data-v-05e59da4=""
+                                                                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                                                                      fill="#ffff" stroke="#D70018"
+                                                                                      stroke-width="1.5"></path>
+                                                                                <path data-v-05e59da4=""
+                                                                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                                                                      stroke="white"
+                                                                                      stroke-linecap="round"
+                                                                                      stroke-linejoin="round"></path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <p class="m-0 reason-item-text font-weight-bold">
+                                                                            Muốn thay sản phẩm đơn hàng</p>
+                                                                    </li>
+                                                                    <li id='other'
+                                                                        class="reason-item d-flex align-items-center">
+                                                                        <div class="reason-item-tick ">
+                                                                            <svg data-v-05e59da4="" width="12"
+                                                                                 height="12" viewBox="0 0 12 12"
+                                                                                 fill="none"
+                                                                                 xmlns="http://www.w3.org/2000/svg">
+                                                                                <path class="tick-outline"
+                                                                                      data-v-05e59da4=""
+                                                                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                                                                      fill="#ffff" stroke="#D70018"
+                                                                                      stroke-width="1.5"></path>
+                                                                                <path data-v-05e59da4=""
+                                                                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                                                                      stroke="white"
+                                                                                      stroke-linecap="round"
+                                                                                      stroke-linejoin="round"></path>
+                                                                            </svg>
+                                                                        </div>
+                                                                        <p class="m-0 reason-item-text font-weight-bold">
+                                                                            Khác</p>
+                                                                        <div class="flex-fill">
+                                                                            <input class="input-field"
+                                                                                   placeholder="Nhập lý do">
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-center d-flex align-items-center justify-content-end">
+                                                                <p class="close-form m-0 mr-4 cursor-pointer">Trở
+                                                                    lại</p>
+                                                                <button class="btn btn-modal-cancellation btn-primary btn-large">
+                                                                    Xác nhận
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+
+                                            </div>
+                                        </div>
+
+                                    </li>
+                                {% endfor %}
+                            {% else %}
+                                <li class="item-bg-color item-null mt-3 mb-3 p-3">
+                                    <div class="content-null"></div>
+                                    <div class="text">Chưa có đơn hàng</div>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal">
+        <div class="overlay"></div>
+        <div class="modal-body modal-reason item-bg-color">
+            <div class="header d-flex">
+                <p class="flex-fill text-center font-weight-bold">Chọn lí do hủy</p>
+                <span class="text-secondary cursor-pointer close-form">
+                    <i class="fa-solid fa-x"></i>
+                </span>
+            </div>
+            <div class="">
+                <ul class="reason-list list-unstyled">
+                    <li class="reason-item d-flex align-items-center">
+                        <div class="reason-item-tick ">
+                            <svg data-v-05e59da4="" width="12" height="12" viewBox="0 0 12 12"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="tick-outline" data-v-05e59da4=""
+                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                      fill="#ffff" stroke="#D70018" stroke-width="1.5"></path>
+                                <path data-v-05e59da4=""
+                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                      stroke="white" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <p class="m-0 reason-item-text font-weight-bold">Tui muốn mua sản phẩm khác</p>
+                    </li>
+                    <li class="reason-item d-flex align-items-center">
+                        <div class="reason-item-tick">
+                            <svg data-v-05e59da4="" width="12" height="12" viewBox="0 0 12 12"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="tick-outline" data-v-05e59da4=""
+                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                      fill="#ffff" stroke="#D70018" stroke-width="1.5"></path>
+                                <path data-v-05e59da4=""
+                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                      stroke="white" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <p class="m-0 reason-item-text font-weight-bold">Muốn thay đổi địa chỉ</p>
+
+                    </li>
+                    <li class="reason-item d-flex align-items-center">
+                        <div class="reason-item-tick ">
+                            <svg data-v-05e59da4="" width="12" height="12" viewBox="0 0 12 12"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="tick-outline" data-v-05e59da4=""
+                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                      fill="#ffff" stroke="#D70018" stroke-width="1.5"></path>
+                                <path data-v-05e59da4=""
+                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                      stroke="white" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <p class="m-0 reason-item-text font-weight-bold">Muốn thay sản phẩm đơn hàng</p>
+                    </li>
+                    <li id='other' class="reason-item d-flex align-items-center">
+                        <div class="reason-item-tick ">
+                            <svg data-v-05e59da4="" width="12" height="12" viewBox="0 0 12 12"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path class="tick-outline" data-v-05e59da4=""
+                                      d="M11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C8.76142 11 11 8.76142 11 6Z"
+                                      fill="#ffff" stroke="#D70018" stroke-width="1.5"></path>
+                                <path data-v-05e59da4=""
+                                      d="M3.75 5.75L4.70603 6.8426C5.11852 7.31402 5.85792 7.29447 6.24492 6.80192L8.25 4.25"
+                                      stroke="white" stroke-linecap="round"
+                                      stroke-linejoin="round"></path>
+                            </svg>
+                        </div>
+                        <p class="m-0 reason-item-text font-weight-bold">Khác</p>
+                        <div class="flex-fill">
+                            <input class="input-field" placeholder="Nhập lý do">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="text-center d-flex align-items-center justify-content-end">
+                <p class="close-form m-0 mr-4 cursor-pointer">Trở lại</p>
+                <button class="btn btn-modal-cancellation btn-primary btn-large">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,256 @@
+{% extends 'layout/base.html' %}
+{% block title %}
+    Home Page
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
+    <script>
+        const extendBookParams = {{ params|tojson }};
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="my-bg-color pt-5">
+        <div class="container position-relative">
+
+            <div class="row">
+                <div class="col-md-3 rounded">
+                    <div class="item-bg-color p-3 rounded">
+                        <div class="list-type">
+                            <p class="font-weight-bold mb-0">NHÓM SẢN PHẨM </p>
+                            <ol class="parent-gerne list-unstyled mb-0 cursor-pointer">
+                            </ol>
+                            <div class="current-gerne cursor-pointer">
+                                {#                                <span id="{{ current_gerne[0].id }}"#}
+                                {#                                      class="selected-filter">{{ current_gerne[0].name }}</span>#}
+                            </div>
+                            <ol class="list-unstyled children-gerne text-filter">
+                                {#                                {% for c in sub_gerne %}#}
+                                {#                                    <li><span class="sub-item" id="{{ c.id }}">{{ c.name }}</span></li>#}
+                                {#                                {% endfor %}#}
+                            </ol>
+                        </div>
+                        <div id="price" value="Giá" class="group-filter price pb-0 pt-3 border-top">
+                            <p class="font-weight-bold mb-0 pb-1">Giá</p>
+                            <ul class="text-decoration-none list-unstyled box-filter pl-2">
+                                <li>
+                                    <a class="checkbox {% if maxPrice == 150000 %}checkbox-checked {% else %} checkbox-unchecked{% endif %}"
+                                       value="0,150000"
+                                    > 0đ - 150,000đ</a>
+                                </li>
+                                <li>
+                                    <a class="checkbox
+                                        {% if minPrice == 150000 %}
+                                        checkbox-checked
+                                        {% else %}
+                                        checkbox-unchecked
+                                         {% endif %} "
+                                       value="150000,300000"
+                                            {#                                       href="/search?minPrice=150000&maxPrice=300000">#}
+                                    > 150,000đ - 300,000đ
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="checkbox {% if minPrice == 300000 %}
+                                        checkbox-checked
+                                        {% else %}
+                                        checkbox-unchecked
+                                         {% endif %} "
+                                       value="300000,500000"
+
+                                    >300,000đ - 500,000đ</a>
+                                </li>
+                                <li>
+                                    <a class="checkbox {% if minPrice == 500000 %}
+                                        checkbox-checked
+                                        {% else %}
+                                        checkbox-unchecked
+                                         {% endif %} "
+                                       value="500000,700000"
+
+                                    > 500,000đ - 700,000đ</a>
+                                </li>
+                                <li>
+                                    <a class="checkbox   {% if minPrice == 700000 %}
+                                        checkbox-checked
+                                        {% else %}
+                                        checkbox-unchecked
+                                         {% endif %} "
+                                       value="700000,99999999"
+                                    > 700,000đ - trở lên</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="group-filter-extend">
+                            {#                            {% for ex in extended_books %}#}
+                            {#                                <div id="group-filter-{{ loop.index }}" value="{{ ex.attribute_name.buckets[0].key }}"#}
+                            {#                                     class="group-filter price pb-0 pt-3 border-top">#}
+                            {#                                    <p class="font-weight-bold mb-0 pb-1">{{ ex.attribute_name.buckets[0].key }}#}
+                            {#                                        <span class="text-secondary">({{ ex.attribute_name.buckets[0].doc_count }})</span>#}
+                            {#                                    </p>#}
+                            {#                                    <ul class="text-decoration-none list-unstyled box-filter pl-2">#}
+                            {#                                        {% for value in ex.collect_values.buckets %}#}
+                            {#                                            <li>#}
+                            {#                                                <a class="checkbox {% if minPrice == 0 %}checkbox-checked {% else %} checkbox-unchecked{% endif %}"#}
+                            {#                                                   value="{{ value.key }}"#}
+                            {#                                                > {{ value.key }}#}
+                            {#                                                    <span class="text-secondary">({{ value.doc_count }})</span></a>#}
+                            {##}
+                            {#                                            </li>#}
+                            {##}
+                            {#                                        {% endfor %}#}
+                            {##}
+                            {#                                    </ul>#}
+                            {#                                </div>#}
+                            {#                            {% endfor %}#}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-9 rounded">
+                    <div class="item-bg-color p-3 rounded">
+                        <div>
+                            <img class="w-100"
+                                 src="https://cdn0.fahasa.com/media/wysiwyg/Thang-11-2024/TanViet_Diamond_1124_Slide_840x320.png"/>
+                            <div class="filter-area d-flex pt-3 pb-2 align-items-center">
+                                {% if minPrice %}
+                                    <p class="">Lọc theo: </p>
+                                {% endif %}
+                                <ul class="filter-list ml-3 d-flex flex-wrap text-decoration-none list-unstyled">
+                                    {% if maxPrice != 999999999 %}
+                                        <li id="price" class="filter-item mr-3 mb-3 price-filter">
+                                            <span>Giá {{ minPrice }}-{% if maxPrice == 99999999 %}
+                                                trở lên
+                                            {% else %}
+                                                {{ maxPrice }}
+                                            {% endif %} đ</span>
+                                            <span class="cursor-pointer delete-filter ml-1"><i
+                                                    class="fa-solid fa-x"></i></span>
+                                        </li>
+                                    {% endif %}
+                                    {% if params %}
+                                        {% for key,value in  params.items() %}
+                                            <li id="{{ key }}" class="filter-item mr-3 mb-3 price-filter">
+                                                <span>{{ value }}</span>
+                                                <span class="cursor-pointer delete-filter ml-1"><i
+                                                        class="fa-solid fa-x"></i></span>
+                                            </li>
+                                        {% endfor %}
+
+                                    {% endif %}
+                                </ul>
+                            </div>
+                            <div class="pt-2">
+                                <span>Sắp xếp theo: </span>
+                                <div class="btn-group ml-2 mr-2">
+                                    <button type="button" class="btn btn-outline-dark dropdown-toggle
+                                     dropdown-toggle-order"
+                                            data-toggle="dropdown">
+                                        {% if order == 'latest' %}
+                                            Mới nhất
+
+                                        {% elif order == 'best_sell_week' %}
+                                            Bán chạy nhất tuần
+                                        {% elif order == 'best_sell_month' %}
+                                            Bán chạy nhất tháng
+                                        {% elif order == 'asc' %}
+                                            Giá tăng
+                                        {% elif order == 'desc' %}
+                                            Giá giảm
+                                        {% else %}
+                                            Độ liên quan
+                                        {% endif %}
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-order custom-dropdown-menu">
+                                        <span class="dropdown-item" value="latest">Mới nhất</span>
+                                        <span class="dropdown-item" value="best_sell_week">Bán chạy nhất tuần</span>
+                                        <span class="dropdown-item" value="best_sell_month">Bán chạy nhất tháng</span>
+                                        <span class="dropdown-item" value="asc">Giá tăng</span>
+                                        <span class="dropdown-item" value="desc">Giá giảm</span>
+                                    </div>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-outline-dark dropdown-toggle
+                                                   dropdown-toggle-pagination"
+                                            data-toggle="dropdown">
+                                        {% if limit %}
+                                            {{ limit }}
+                                        {% else %} 12
+                                        {% endif %}  sản phẩm
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-pagination custom-dropdown-menu">
+                                        <span class="dropdown-item" value="12">12 sản phẩm</span>
+                                        <span class="dropdown-item" value="24">24 sản phẩm</span>
+                                        <span class="dropdown-item" value="36">36 sản phẩm</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row list-book mt-4 pt-3 border-top">
+                            {#                            <p class="label-warning">#}
+                            {#                                Không có sản phẩm phù hợp với tìm kiếm của bạn#}
+                            {#                            </p>#}
+                            {#                            {% for b in pagination.books %}#}
+                            {#                                <a href="#" class="card col-md-3">#}
+                            {#                                    <span class="discount text-white">10%</span>#}
+                            {#                                    <img class="card-img-top"#}
+                            {#                                         src="{% if  b.images %}#}
+                            {#                                         	{{ b.images[0].image_url }}#}
+                            {#                                         	{% else %} null#}
+                            {#                                         {% endif %} "#}
+                            {#                                         alt="Card image">#}
+                            {#                                    <div class="card-body p-0">#}
+                            {#                                        <p class="card-text">{{ b.title }}</p>#}
+                            {#                                        <p class="text-primary font-weight-bold mb-1">{{ b.price|currency('VND') }}</p>#}
+                            {#                                        <p class="text-secondary text-decoration-line-through mb-1">{{ b.price }}đ</p>#}
+                            {#                                    </div>#}
+                            {#                                    <div class="rating">#}
+                            {#                                        <i class="fa-regular fa-star"></i>#}
+                            {#                                        <i class="fa-regular fa-star"></i>#}
+                            {#                                        <i class="fa-regular fa-star"></i>#}
+                            {#                                        <i class="fa-regular fa-star"></i>#}
+                            {#                                        <i class="fa-regular fa-star"></i>#}
+                            {#                                    </div>#}
+                            {#                                </a>#}
+                            {#                            {% endfor %}#}
+
+                        </div>
+                        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+                            <ul class="pagination">
+                                {#                                {% if pagination.current_page > 1 %}#}
+                                {#                                    <li class="page-item prev-button">#}
+                                {#                                        <a class="page-link" href="#" aria-label="Previous">#}
+                                {#                                            <i class="fa-solid fa-arrow-left"></i>#}
+                                {#                                        </a>#}
+                                {#                                    </li>#}
+                                {#                                {% endif %}#}
+                                {#                                {% for num in range( 1,pagination.pages + 1 ) %}#}
+                                {#                                    <li class="page-item item-button">#}
+                                {#                                        <a class="page-link#}
+                                {#                                        {% if num == pagination.current_page %}#}
+                                {#                                        	active#}
+                                {#                                        {% endif %} "#}
+                                {#                                           href="/search?page={{ num }}" aria-label="{{ num }}">#}
+                                {#                                            {{ num }}#}
+                                {#                                        </a>#}
+                                {#                                    </li>#}
+                                {#                                {% endfor %}#}
+                                {#                                {% if pagination.current_page < pagination.pages %}#}
+                                {#                                    <li class="page-item next-button">#}
+                                {#                                        <a class="page-link" href="#" aria-label="Next">#}
+                                {#                                            <i class="fa-solid fa-arrow-right"></i>#}
+                                {#                                        </a>#}
+                                {#                                    </li>#}
+                                {#                                {% endif %}#}
+                            </ul>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

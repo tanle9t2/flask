@@ -1,0 +1,268 @@
+{% extends 'layout/base.html' %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/book-detail.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="my-bg-color pt-3 pb-3">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-5 rounded banner">
+                    <div class="item-bg-color rounded p-3">
+                        <div class="poster d-flex justify-content-center">
+                            <img src="{% if book.images|length %}
+                                 	{{ book.images[0].image_url }}
+                                 	{% else %} ''
+                                 {% endif %} ">
+                        </div>
+                        <div class="images">
+                            <ul class="list-unstyled list-image d-flex justify-content-start pb-3">
+                                {% for img in book.images[:4] %}
+                                    <li class="image-item">
+                                        <img src="{{ img.image_url }}">
+                                    </li>
+                                {% endfor %}
+                                {% if book.images|length > 4 %}
+                                    <li class="image-item flex-fill h-100">
+                                        <div class="image-remain text-white">
+                                            +{{ (book.images|length) -4 }}
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="controller d-flex align-items-center justify-content-around">
+                            <button class="btn-add-cart btn pt-2 pb-2 pr-3 pl-3 btn-primary-outline btn-large">
+                                <i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ hàng
+                            </button>
+                            <button class="btn btn-buy pt-2 pb-2 pr-3 pl-3 btn-primary btn-large">
+                                Mua ngay
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 rounded">
+                    <div class="item-bg-color p-2 rounded">
+                        <div class="item-header">
+                            <h4>{{ book.title }}</h4>
+                        </div>
+                        <div class="item-text row m-0">
+                            <span class="col-md-6">Nhà cung cấp: <span
+                                    class="font-weight-bold">Nhà Xuất Bản Kim Đồng</span></span>
+                            <span class="col-md-6"> Tác giả: <span class="font-weight-bold">{{ book.author }}</span>
+                                </span>
+                            <span class="col-md-6"> Nhà xuất bản:
+                                 <span class="font-weight-bold">{{ book.publisher_info.publisher_name }}</span>
+                                </span>
+                            <span class="col-md-6">Hình thức bìa:
+                                 <span class="font-weight-bold">{{ book.format }}</span>
+                                </span>
+                        </div>
+                        <div class="rating">
+                            <span><i class="fa-regular fa-star"></i></span>
+                            <span><i class="fa-regular fa-star"></i></span>
+                            <span><i class="fa-regular fa-star"></i></span>
+                            <span><i class="fa-regular fa-star"></i></span>
+                            <span><i class="fa-regular fa-star"></i></span>
+                            <span class="text-warning">({{ book.comments|length }} đánh giá)</span>
+                            <span class="ml-3 text-center"> | Đã bán {{ sold_book }}</span>
+                        </div>
+                        <div class="">
+                            <span class="text-large text-primary font-weight-bold">{{ book.price|currency('VND') }} </span>
+                            <span class="text-secondary text-decoration-line-through mb-1">{{ book.price|currency('VND') }}</span>
+                            <span class="discount">-10%</span>
+                        </div>
+                    </div>
+                    <div class="item-bg-color p-2 mt-3 rounded">
+                        <div class="item-header">
+                            <h4>Thông tin chi tiết</h4>
+                        </div>
+                        {% for key,value in detail_book.items() %}
+                            <div class="row m-0 pt-4 item-information">
+                                <div class="col-md-3 p-0">
+                                    {{ key }}
+                                </div>
+                                <div class="col-md-9 text-black">{{ value }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="item-bg-color p-2 mt-3 rounded position-relative">
+                        <div class="item-header">
+                            <h4>Mô tả sản phẩm</h4>
+                        </div>
+                        <div class="item-content">
+                            <p>  {{ book.description }}</p>
+                        </div>
+                        <div class="block-gradient">
+                        </div>
+                        <div class="item-more-detail text-center cursor-pointer">
+                            <span class="text-primary">Xem thêm </span>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="item-bg-color position-relative rounded p-3 mt-3">
+                <h2>Sản phẩm liên quan</h2>
+                <div class="my-carousel d-flex justify-content-between">
+                    {% for b in books %}
+                        <a class="text-decoration-none text-black" href="/search/detail?bookId={{ b.book_id }}"
+                           style="width: 244px">
+                            <img class="card-img-top"
+                                 src="{% if b.images|length %}
+                                 	{{ b.images[0].image_url }}
+                                 	{% else %} ''
+                                 {% endif %} "
+                                 alt="Card image">
+                            <div class="card-body p-0">
+                                <p style="; min-height: 48px" class="card-text">{{ b.title }}</p>
+                                <p class="text-primary font-weight-bold mb-1">{{ b.price|currency('VND') }}
+                            </div>
+                            <div class="rating">
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+                        </a>
+                    {% endfor %}
+
+                </div>
+                <button class="custom-prev"><i class="fa-solid fa-arrow-left"></i></button>
+                <button class="custom-next"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+            <div class="item-bg-color rounded p-3 mt-3">
+                <h4>Đánh giá sản phẩm</h4>
+                <div class="rating-infor d-flex align-items-center">
+                    <div class="overview text-center d-flex align-items-center">
+                        <div>
+                            <p class="mb-2 text-large"><span
+                                    class="font-weight-bold">{{ avg_rating | round(0, method='floor') }}</span>/5
+                            </p>
+                            {% for i in range(0, (avg_rating| round(0, method='floor'))|int ) %}
+                                <i class="text-warning fa-solid fa-star"></i>
+                            {% endfor %}
+
+                            {% for i in range(0, 5 - (avg_rating| round(0, method='floor'))|int ) %}
+                                <i class="fa-regular fa-star"></i>
+                            {% endfor %}
+
+                            <p length='{{ comments|length }}' class="text-warning total-comment">({{ comments|length }}
+                                đánh giá)</p>
+                        </div>
+                        <div class="star-percent position-relative ml-3">
+                            {% for i in range(5,0,-1) %}
+                                <div class="d-flex align-items-center">
+                                    <p class="p-0 m-0">{{ i }} sao</p>
+                                    <div class="review-rating">
+                                        <div style="width: 0%;"></div>
+                                    </div>
+                                    {% if comments|length %}
+                                        <div class="review-star"
+                                             style="width: calc(200px * {{ avg_star[i-1] / comments | length }});">
+                                            <div style="width: 0%;"></div>
+                                        </div>
+                                    {% endif %}
+                                    <p class="p-0 m-0 review-star-percent">
+                                        {% if comments|length %}{{ "%.0f" % ((avg_star[i-1] / comments | length)*100) }}
+                                        {% else %}0
+                                        {% endif %}
+                                        %</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="flex-fill text-center form-comment-open">
+                        <button class="btn pt-2 pb-2 pr-3 pl-3 btn-primary-outline btn-large">
+                            <i class="fa-solid fa-pen"></i> Viết đánh giá</a>
+                        </button>
+                    </div>
+                </div>
+                <div class="group-comment d-flex flex-column">
+                    {% for comment in comments %}
+                        <div class="comment-item d-flex pt-3 pb-3">
+                            <div class="user-infor">
+                                <p class="user-infor-name">{{ comment.user.full_name }}</p>
+                                <p class="user-infor-post text-secondary">{{ comment.created_at.strftime('%d/%m/%Y') }}</p>
+                            </div>
+                            <div class="comment">
+                                <div class="rating">
+                                    {% for i in range(0,comment.star_count) %}
+                                        <i class="text-warning fa-solid fa-star"></i>
+                                    {% endfor %}
+
+                                    {% for i in range(0, 5 - comment.star_count) %}
+                                        <i class="fa-regular fa-star"></i>
+                                    {% endfor %}
+
+                                </div>
+                                <p class="parent-comment m-0">
+                                    {{ comment.content }}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal modal-comment">
+        <div class="overlay"></div>
+        <div class="modal-body item-bg-color">
+            <div class="header d-flex">
+                <p class="flex-fill text-center font-weight-bold">Viết đánh giá sản phẩm</p>
+                <span class="text-secondary cursor-pointer close-form">
+                    <i class="fa-solid fa-x"></i>
+                </span>
+            </div>
+            <div class="rating-form mb-2 text-center text-warning">
+                <span><i class="fa-regular fa-star text-medium"></i></span>
+                <span><i class="fa-regular fa-star text-medium"></i></span>
+                <span><i class="fa-regular fa-star text-medium"></i></span>
+                <span><i class="fa-regular fa-star text-medium"></i></span>
+                <span><i class="fa-regular fa-star text-medium"></i></span>
+            </div>
+            <div class="">
+                <textarea id="review_field" cols="5" rows="3"
+                          class="comment-area"
+                          placeholder="Nhập nhận xét của bạn về sản phẩm"></textarea>
+            </div>
+            <div class="control text-right">
+                <span class="text-secondary mr-3 cursor-pointer close-form">Hủy</span>
+                <button class="btn btn-modal-comment pt-2 pb-2 pr-3 pl-3 btn-primary btn-large">
+                    Gửi nhận xét
+                </button>
+            </div>
+        </div>
+    </div>
+{#    <div class="carousel-container">#}
+{#        <div class="carousel-slide">#}
+{#            {% if book.images|length %}#}
+{#                {% for image in book.images %}#}
+{#                    <img src="{{ image.image_url }}" alt="Image 1">#}
+{#                {% endfor %}#}
+{#            {% endif %}#}
+{##}
+{#        </div>#}
+{#        <div class="carousel-nav">#}
+{#            <button id="prev">❮</button>#}
+{#            <button id="next">❯</button>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/slickyCarousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bookDetail.js') }}"></script>
+
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Slick JS -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+{% endblock %}

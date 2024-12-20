@@ -1,0 +1,114 @@
+{% extends 'layout/base.html' %}
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cart.css') }}">
+{% endblock %}
+{% block js %}
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+    <script>
+        const flashedMessages = {{ get_flashed_messages(with_categories=true) | tojson }};
+
+        // Example: Display messages dynamically
+        flashedMessages.forEach(([category, message]) => {
+            
+            showToast(message, true)
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="my-bg-color pt-3 pb-3">
+        <div class="container">
+            <div class="row-body row">
+                <div>
+                    <span class="font-weight-bold text-large">Giỏ hàng</span>
+                    <span class="cart-header-total">({{ cart.cart_items|length }}  sản phẩm)</span>
+                </div>
+                {% if cart.cart_items|length %}
+                    <div class="content d-flex p-0">
+                        <div class="col-md-9">
+                            <div class="item-bg-color rounded p-3 align-items-center">
+                                <div class="header-cart d-flex">
+                                    <div class="check-all col-md-8">
+                                        <input type="checkbox" id="toggleAll" name="vehicle1" value="Bike">
+                                        <span class="cart-total">Chọn tất cả ({{ cart.cart_items|length }})</span>
+                                    </div>
+                                    <p class="col-md-2 m-0">Số lượng</p>
+                                    <p class="col-md-2 m-0">Thành tiền</p>
+
+                                </div>
+                            </div>
+                            <div class="item-bg-color cart rounded mt-3 p-3">
+                                {% for cart_item in cart.cart_items %}
+                                    <div id="{{ cart_item.book.book_id }}" class="cart-item d-flex align-items-center">
+                                        <div class="col-md-1">
+                                            <input type="checkbox" class="checkbox"
+                                                   value="{{ cart_item.book.book_id }}">
+                                        </div>
+                                        <div class="col-md-11 p-0 d-flex align-items-center">
+                                            <div class="d-flex group-infor">
+                                                <a href="/search/detail?bookId={{ cart_item.book.book_id }}">
+                                                    <img class=" cart-item-image"
+                                                         src="{{ cart_item.book.images[0].image_url }}">
+                                                </a>
+                                                <div class="cart-item-detail flex-column d-flex justify-content-between">
+                                                    <a href="/search/detail?bookId={{ cart_item.book.book_id }}">
+                                                        <p class="cart-item-detail-title">{{ cart_item.book.title }}</p>
+                                                    </a>
+                                                    <p>
+                                                        <span class="font-weight-bold">{{ cart_item.book.price|currency('VND') }}</span>
+                                                        <span class="text-decoration-line-through text-secondary">{{ cart_item.book.price|currency('VND') }}</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="group-controll d-flex">
+                                                <div class="controll ">
+                                            <span class="cart-item-descrease cursor-pointer"
+                                                  value= {{ cart_item.book.price }}>-</span>
+                                                    <span class="cart-item-quantity">{{ cart_item.quantity }}</span>
+                                                    <span class="cart-item-increase cursor-pointer"
+                                                          value= {{ cart_item.book.price }}>+</span>
+                                                </div>
+                                                <p class="cart-item-price font-weight-bold text-primary m-0">{{ (cart_item.book.price * cart_item.quantity)|currency('VND') }}</p>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-1 p-0 trash cursor-pointer">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="item-bg-color rounded p-3">
+                                <div class="d-flex justify-content-between">
+                                    <p>Thành tiền</p>
+                                    <p class="text-primary total-price font-weight-bold">0đ</p>
+                                </div>
+
+                                <div class="text-center">
+                                    <button disabled
+                                            class="btn btn-payment btn-primary w-100 text-uppercase font-weight-bold">
+                                        Thanh toán
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="h-50vh col-md-12 item-bg-color rounded d-flex flex-column align-items-center justify-content-center">
+                        <img src="https://cdn0.fahasa.com/skin//frontend/ma_vanese/fahasa/images/checkout_cart/ico_emptycart.svg"
+                             class="center">
+                        <p>Chưa có sản phẩm nào</p>
+
+                        <a href="/search/" class="btn btn-large btn-primary text-white">Mua sắm ngay</a>
+
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}

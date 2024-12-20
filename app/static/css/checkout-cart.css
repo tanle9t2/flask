@@ -1,0 +1,194 @@
+.input-address {
+    border: 0;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--second-color);
+    width: 100%;
+    margin: 10px 0;
+}
+
+.checkout-cart {
+    width: 40% !important;
+}
+
+.arrow {
+    position: absolute;
+    left: 97%;
+    top: 12px;
+}
+
+.address-user {
+    margin: 20px 0px;
+    border-bottom: 1px solid black;
+
+}
+
+.custom-label {
+    width: 100%;
+    display: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.active {
+    display: block !important;
+}
+
+.checkout {
+    box-shadow: 0px -4px 10px -4px rgba(0, 0, 0, 0.66);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    padding: 20px 50px;
+}
+
+input-address:focus {
+    border: none;
+}
+
+.list-address {
+    position: absolute;
+    display: none;
+    left: 0;
+    right: 0;
+    border-radius: 5px;
+    box-shadow: 0 6px 24px 0 rgba(0, 0, 0, .05), 0 0 0 1px rgba(0, 0, 0, .08);
+    opacity: 0; /* Fully visible */
+    transition: opacity 0.5s ease;
+}
+
+.address-item {
+    padding: 10px 10px;
+}
+
+.address-item:hover {
+    background: #ea6e73;
+}
+
+.select-address:focus {
+    border: none;
+}
+
+.active-address {
+    font-weight: bold;
+    color: var(--red);
+}
+
+.payment-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.select-payment {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid rgba(145, 158, 171, .239);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: fadein linear 0.2s;
+    display: block;
+}
+
+.modal-body {
+    --growth-from: 0.7;
+    --growth-to: 1;
+    background-color: var(--white-color);
+    margin: auto;
+    z-index: 3;
+    position: relative;
+    border-radius: 5px;
+    animation: growth linear 0.2s;
+    flex: 0.3;
+}
+
+.payment-method-item {
+    border-radius: 5px;
+    border: 1px solid rgba(145, 158, 171, .239);
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.payment-method-item:hover {
+    background: #ea6e73;
+}
+
+.payment-method-item-icon {
+    height: 50px;
+    width: 60px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-right: 20px;
+}
+
+.payment-method-item-active {
+    border-color: var(--red);
+
+}
+
+.payment-item-tick {
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    display: none;
+}
+
+.book-item-img {
+    min-width: 145px;
+    max-width: 145px;
+    height: 145px;
+}
+
+.book-item {
+    padding: 15px 0;
+    border-bottom: 0.5px solid #777;
+}
+
+.review-book-title {
+    flex: 0.5;
+}
+
+.review-book-number {
+    flex: 0.2;
+}
+
+
+.form-address > input, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.address-item-tick {
+    display: block;
+    line-height: 10px;
+    margin-right: 10px;
+}
+

@@ -1,0 +1,260 @@
+.account:hover .sub-login {
+    display: flex;
+}
+
+.sub-login::after {
+    content: "";
+    width: 20%;
+    height: 30px;
+    background-color: transparent;
+    position: absolute;
+    display: block;
+    top: -28px;
+    left: 79%;
+}
+
+.suggestion-list {
+    display: none;
+    z-index: 10;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 60px;
+    background-color: var(--white);
+    border-radius: 10px !important;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-list-book-image {
+    width: 47px;
+    height: 49px;
+}
+
+.suggestion-list-book-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 35px;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    color: #333;
+}
+
+.suggestion-list-book-item {
+    width: 25%;
+}
+
+.suggestion-list-book-item:hover {
+    border-radius: 5px !important;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+.icon-search {
+    position: absolute !important;
+    z-index: 20;
+    top: 50%;
+    left: 93%;
+    transform: translate(-50%, -50%);
+}
+
+.form-control {
+    border-radius: 10px !important;
+}
+
+.sub-login {
+    display: none;
+    position: absolute;
+    top: 50%;
+    top: 150%;
+    left: 11%;
+    background-color: var(--white-color);
+    padding: 20px;
+    z-index: 1;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+}
+
+.sub-notification::after {
+    content: "";
+    width: 34%;
+    height: 30px;
+    background-color: transparent;
+    position: absolute;
+    display: block;
+    top: -28px;
+    left: 64%;
+}
+
+.sub-notification {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    top: 150%;
+    right: 65%;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+.bell:hover .sub-notification {
+    display: block;
+}
+
+.sub-notification-header {
+    border-bottom: 1px solid #f2f4f5;
+    padding: 10px 20px;
+}
+
+.sub-notification-menu-icon {
+    background-image: url("https://cdn0.fahasa.com/skin/frontend/ma_vanese/fahasa/images/customer/ico_login.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 80px;
+    display: block;
+}
+
+.cart-link:hover .menu-cart-item {
+    display: block;
+}
+
+.menu-cart-item {
+    position: absolute;
+    z-index: 10;
+    background-color: var(--white-color);
+    border-radius: 10px;
+    top: 150%;
+    right: 0;
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    display: none;
+    min-width: 280px;
+}
+
+.menu-cart-item::after {
+    content: "";
+    width: 34%;
+    height: 30px;
+    background-color: transparent;
+    position: absolute;
+    display: block;
+    top: -28px;
+    right: 0;
+}
+
+.sub-cart-item-image {
+    height: 68px;
+    width: 68px;
+}
+
+.sub-cart {
+    max-height: 368px;
+    overflow-y: auto;
+}
+
+.cart-item-null {
+    background: url(https://cdn0.fahasa.com/skin//frontend/ma_vanese/fahasa/images/checkout_cart/ico_emptycart.svg) no-repeat center center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
+    height: 80px;
+}
+
+.menu-cart-item-header {
+    border-bottom: 0.5px solid #777;
+}
+
+.sub-cart-item-detail {
+    width: 252px;
+}
+
+.sub-cart-item-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.label-total {
+    position: absolute;
+    background: red;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    top: -16px;
+    left: 32px;
+< < < < < < < HEAD
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000000000000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% 10%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #aaa;
+    font-size: 50px !important;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000000000000000000000;
+}
+
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.profile-picture {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    width: 100%;
+}
+
+.form-group label {
+    align-content: center;
+    display: block;
+    font-weight: bold;
+    color: #555;
+= = = = = = = >>> >>> > ab64b8660cc3e57d56ab869f7998cb88bb80e9bb
+}

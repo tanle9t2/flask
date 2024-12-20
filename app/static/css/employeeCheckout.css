@@ -1,0 +1,20 @@
+.phone-number-dropdown {
+    list-style: none;
+    position: absolute;
+    top:100%;
+    width: 100%;
+    border: 1px solid #e9ecef !important;
+    background-color: white;
+    margin: 0;
+    z-index: 100;
+
+}
+
+.phone-number-dropdown li {
+    padding: 10px 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+
+

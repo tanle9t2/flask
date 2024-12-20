@@ -1,0 +1,220 @@
+body {
+    background-color: #f0f0f0;
+}
+
+.my-border {
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
+.custom-dropdown-toggle {
+    background-color: #5a9; /* Custom background color */
+    color: var(--white-color); /* Custom text color */
+    border: none; /* Remove border */
+}
+
+.custom-dropdown-toggle:hover {
+    background-color: #4a8; /* Custom hover color */
+}
+
+
+
+a:hover {
+    text-decoration: none;
+    color: var(--black-color);
+    /*transform: scale(1.2);*/
+}
+
+a.text-primary:focus,
+a.text-primary:hover {
+    color: inherit !important;
+}
+
+a {
+    text-decoration: none;
+    color: var(--black-color);
+}
+
+.text-filter {
+    color: var(--second-color);
+}
+
+.card {
+    border: none;
+    border-radius: 0px;
+    padding: 10px;
+    position: relative;
+    color: var(--black-color);
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 48px;
+}
+
+.discount {
+    position: absolute;
+    background-color: var(--yellow-color);
+    border-radius: 50%;
+    padding: 10px;
+    right: 0;
+    text-align: center;
+}
+
+.card:hover {
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.text-decoration-line-through {
+    text-decoration: line-through;
+}
+
+.rating {
+    font-size: 10px;
+}
+
+.content a {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.content a:hover {
+    cursor: pointer;
+    color: #ea7696 !important;
+}
+
+.my-5 {
+    margin-bottom: 0px !important;
+}
+
+.custom-radio .custom-control-label::before {
+    border-radius: 0px;
+}
+
+.checkbox-checked {
+    padding-left: 20px;
+    background: transparent url(https://cdn0.fahasa.com/skin/frontend/base/default/images/manapro_filtercheckboxes/ico_checked.png) 0 50% no-repeat !important;
+}
+
+.checkbox {
+    background: transparent url(https://cdn0.fahasa.com/skin/frontend/base/default/images/manapro_filtercheckboxes/ico_uncheck.png) 0 50% no-repeat;
+}
+
+.checkbox-checked,
+.checkbox {
+    padding-left: 20px;
+}
+
+.box-filter > li {
+    display: flex;
+    cursor: pointer;
+}
+
+.box-filter > li:hover {
+    color: #bf9a61;
+    transition: background-color 0.3s ease, color 0.5s ease;
+}
+
+.parent-gerne {
+    padding-left: 5px;
+}
+
+.current-gerne {
+    padding-left: 15px;
+}
+
+.children-gerne {
+    padding-left: 25px;
+}
+
+.parent-gerne > li > a:hover,
+.current-gerne > a:hover,
+.children-gerne > li:hover {
+    color: #bf9a61 !important;
+    transition: background-color 0.3s ease, color 0.5s ease;
+    cursor: pointer;
+}
+
+.selected-filter {
+    color: var(--yellow-color);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.page-item > a:hover {
+    background-color: #fcdab0;
+    color: var(--black-color);
+}
+
+.page-item {
+    border: 5px;
+}
+
+.page-link {
+    padding: 9px 17px;
+    color: var(--black-color);
+    border: 0px;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.page-link.active {
+    color: var(--white-color);
+    background-color: var(--red);
+}
+
+.page-link.active:hover {
+    color: var(--white-color);
+    background-color: var(--red);
+}
+
+
+
+.filter-item {
+    background-color: #fef4e8;
+    color: var(--yellow-color);
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.dropdown-toggle-order {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 175px;
+}
+
+.card-img-top {
+    height: 186px;
+    max-height: 186px;
+    max-width: 186px;
+}
+
+.label-warning {
+
+    padding: 20px;
+    border: 1px solid #fcd344;
+    background-color: #fafaec;
+    color: #3d6611;
+}
+
+.input-group .btn {
+    z-index: 5;
+}
+
+input:-webkit-autofill {
+    background-color: #f0f8ff !important; /* Change the background color */
+    color: #000 !important; /* Change the text color */
+    border: 2px solid #007bff !important; /* Add a border */
+    box-shadow: 0 0 5px #007bff !important; /* Add a glow effect */
+    transition: background-color 0.3s ease-in-out; /* Add a smooth transition */
+}
+
+input[type="text"]:-webkit-autofill {
+    background-color: #e6ffe6; /* Light green for text fields */
+}

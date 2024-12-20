@@ -1,0 +1,149 @@
+* {
+    --red: #c92127;
+    --yellow-color: #F7941E;
+    --white-color: #ffffff;
+    --btn-size-lagre: 200px;
+    --second-color: #666;
+    --black-color: #000
+}
+
+a:hover {
+    color: inherit !important;
+    text-decoration: inherit !important;
+}
+
+a {
+    color: var(--black-color);
+}
+
+
+.container {
+    width: 90% !important;
+}
+
+.btn-primary:disabled {
+    background-color: #e0e0e0;
+    border-color: #e0e0e0;
+    cursor: not-allowed !important;
+}
+
+
+.text-black {
+    color: var(--black-color);
+}
+
+.text-primary {
+    color: var(--red) !important;
+}
+
+
+.text-secondary {
+    color: #6c757d !important;
+}
+
+.btn-primary {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white-color);
+}
+
+.btn-primary-outline {
+    border-color: var(--red);
+    background-color: var(--white-color);
+    color: var(--red);
+}
+
+.btn-large {
+    width: var(--btn-size-lagre);
+}
+
+.btn-primary:hover {
+    background-color: var(--red);
+    border-color: var(--red);
+    color: var(--white-color) !important;
+}
+
+.text-large {
+    font-size: 30px;
+}
+
+.text-medium {
+    font-size: 25px;
+}
+
+.item-bg-color {
+    background: var(--white-color);
+}
+
+.my-bg-color {
+    background: #f0f0f0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: fadein linear 0.2s;
+    display: block;
+}
+
+.modal-body {
+    --growth-from: 0.7;
+    --growth-to: 1;
+    background-color: var(--white-color);
+    margin: auto;
+    z-index: 3;
+    position: relative;
+    border-radius: 5px;
+    animation: growth linear 0.2s;
+    flex: 0.5;
+}
+
+.h-100vh {
+    height: 100vh;
+}
+
+.h-50vh {
+    height: 50vh;
+}
+
+.spinner {
+    position: absolute;
+    left: 50%;
+    top: 35%;
+    z-index: 5;
+    background-color: #ffedd1;
+    padding: 15px 50px;
+    text-align: center;
+    border: 1px solid var(--yellow-color);
+    display: none;
+}
+
+.overlay-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: fadein linear 0.2s;
+    display: none;
+}

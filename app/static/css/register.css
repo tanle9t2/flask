@@ -1,0 +1,249 @@
+* {
+    box-sizing: border-box;
+  }
+
+  body {
+    line-height: 1.8;
+    overflow: auto;
+    color: #5a5a5a;
+    margin: 0;
+    padding-top: 50px;
+    background-color: #f4f7f6;
+    position: relative;
+    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  a {
+    text-decoration: none;
+    color: #c92127;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .login-wrap {
+    background-color: #c92127;
+    top: 0;
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    border-radius: 0px 65px 65px 0px;
+    width: 50%;
+  }
+
+  .login-sec {
+    position: absolute;
+  }
+
+  .login-sec img {
+  margin: 25%;
+  }
+
+  .login-wrap-bg {
+    position: absolute;
+    right: 0;
+    padding: 15px 90px 15px;
+    width: 50%;
+  }
+
+  .loginbox {
+    background: #ffffff;
+    border-radius: 20px;
+  }
+
+  .login-right {
+    padding: 50px;
+  }
+
+  .account-logo {
+    margin-bottom: 50px;
+  }
+
+  .img1 {
+    height: 2.5rem;
+    margin-top: 8px;
+  }
+
+  .ele1 {
+    font-size: 30px;
+    font-weight: 600;
+    color: #c92127;
+  }
+
+  .login-wrapper .loginbox .login-right h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .form-group-1 {
+    width: 49%;
+    margin: 0px 2% 0px 0px;
+  }
+
+  .form-group-2 {
+    width: 49%;
+  }
+
+  .form-group label {
+    font-size: 15px;
+    color: #5a5a5a;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding: 0px 5px;
+  }
+
+  .form-control-all {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.375rem;
+    margin-bottom: 3%;
+  }
+
+  .forgotpass {
+    display: block !important;
+    margin: 5px 0 15px 0;
+  }
+
+  .forgotpass a {
+    color: #c92127;
+    font-size: 14px;
+    font-weight: 600;
+    margin-left: auto;
+  }
+
+  .forgotpass font {
+    color: #5a5a5a;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .login-btn {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .login-btn > a:hover {
+    .btn-primary {
+        background-color: rgb(215, 15, 15);
+      }
+  }
+
+  .btn-primary {
+    background-color: #c92127;
+    border-radius: 12px;
+    font-size: 18px;
+    padding: 10px 15px;
+    width: 100%;
+    font-weight: 600;
+    color: white;
+    border: white;
+  }
+
+  .next-sign {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .social-login > a {
+    background: rgba(51, 52, 72, 0.05);
+    border-radius: 12px;
+    height: 40px;
+    margin-right: 6px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.form-control-all:focus {
+    border-color: #c92127 !important;
+    outline: none;
+}
+
+.box {
+  position: relative;
+}
+
+.toggle {
+  position: absolute;
+  top: 0;
+  right: 5%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  cursor: pointer;
+  user-select: none;
+  color: #5a5a5a;
+  font-family: fontAwesome;
+}
+
+.toggle::before {
+  content: '\f06e';
+}
+
+.toggle.hide::before {
+  content: '\f070';
+}
+
+  @media screen and (max-width: 429px) {
+    body {
+      overflow: hidden;
+      background-color: #2e37a4;
+    }
+    .login-wrap {
+      display: none;
+    }
+    .login-wrap-bg {
+      top: 15vh;
+      width: 100%;
+      padding: 15px;
+    }
+    .login-right {
+      padding: 20px;
+    }
+    .account-logo {
+      margin-bottom: 10px;
+    }
+    .login-wrapper .loginbox .login-right h2 {
+      font-size: 25px;
+      margin: 20px 0;
+    }
+    .forgotpass {
+      margin-bottom: 15px;
+    }
+    .container-checkpass {
+    display: flex;
+    flex-direction: column;
+    }
+    .login-btn {
+
+      margin-bottom: 15px;
+    }
+    .social-login > a {
+      height: 40px;
+      width: 40px;
+    }
+    .social-login > a:last-child {
+      margin-right: 0;
+    }
+    .next-sign p {
+      width: 55%;
+      margin: 0;
+    }
+  }

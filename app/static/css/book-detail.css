@@ -1,0 +1,306 @@
+.carousel-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: black;
+}
+
+.carousel-slide {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+
+.carousel-nav button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.poster {
+    width: 100%;
+    height: 400px;
+    padding: 20px;
+}
+
+.poster > img {
+    max-width: 360px;
+}
+
+.images {
+    padding: 5px;
+    width: 100%;
+}
+
+.image-item > img {
+    width: 100%;
+    height: 86px;
+    padding: 10px;
+
+}
+
+.image-item > img:hover {
+    border-radius: 5px;
+    border: 1px solid var(--red);
+}
+
+.image-item {
+    margin: 5px;
+    cursor: pointer;
+    width: 25%;
+}
+
+
+.btn-primary-outline {
+    color: var(--red) !important;
+}
+
+.item-text {
+    font-size: 14px;
+}
+
+.item-text > span {
+    width: 50%;
+    padding: 0px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.rating {
+    margin: 5px 0px;
+}
+
+.rating > span {
+    font-size: 14px;
+    text-align: center;
+}
+
+.item-information {
+    padding: 3px 0;
+    border-bottom: 0.5px solid #F2F4F5;
+    color: #777;
+}
+
+.item-content {
+    max-height: 300px;
+    overflow: hidden;
+    /*transition: max-height 0.5s ease-out;*/
+}
+
+.block-gradient {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    bottom: 30px;
+    left: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgb(255, 255, 255));
+}
+
+.banner {
+    position: sticky !important;
+    top: 16px;
+}
+
+.slick-list {
+    width: 100%;
+
+}
+
+.my-carousel {
+    padding: 30px;
+    border-top: 1px solid #CCCCCC !important;
+}
+
+.custom-prev, .custom-next {
+    font-size: 30px; /* Size of the buttons */
+    background-color: #fff !important;
+    box-shadow: 0px 2px 8px #00000029 !important;
+    border-radius: 50%; /* Rounded buttons */
+    width: 40px; /* Button width */
+    height: 40px; /* Button height */
+    display: inline-block;
+    line-height: 25px; /* Vertically center the text */
+    text-align: center; /* Horizontally center the text */
+    position: absolute;
+    font-size: 16px;
+    top: 60%;
+    border: 1px solid #CCCCCC !important;
+    transform: translateY(-50%);
+}
+
+.custom-prev {
+    left: -20px; /* Position left button */
+}
+
+.custom-next {
+    right: -20px; /* Position right button */
+}
+
+.review-rating {
+    margin: 5px 10px 0;
+    width: 200px;
+    height: 5px;
+    background-color: #F2F4F5;
+}
+
+.review-star {
+    margin: 5px 10px 0;
+    width: 200px;
+    height: 5px;
+    background-color: yellow;
+    position: absolute;
+    left: 37px;
+}
+
+
+.discount {
+    margin-left: 8px;
+    padding: 4px;
+    border-radius: 4px;
+    position: unset !important;
+    background-color: var(--red);
+    color: #fff;
+}
+
+.btn:hover {
+
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.2);
+    animation: fadein linear 0.2s;
+    display: block;
+}
+
+.modal-body {
+    --growth-from: 0.7;
+    --growth-to: 1;
+    background-color: var(--white-color);
+    margin: auto;
+    z-index: 3;
+    position: relative;
+    border-radius: 5px;
+    animation: growth linear 0.2s;
+    flex: 0.5;
+}
+
+.comment-area {
+    height: 122px;
+    resize: none;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.image-remain {
+    height: 86px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(13, 14, 15, 0.8);
+}
+
+
+input[type="radio"]:checked + .custom-label {
+    display: flex;
+}
+
+.group-comment {
+    margin: 20px 0px;
+    padding: 20px 0px;
+    border-top: 0.5px solid #F2F4F5;;
+}
+
+.card {
+    border: none;
+    border-radius: 0px;
+    padding: 10px;
+    position: relative;
+    color: var(--black-color);
+}
+
+.card:hover {
+    box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.card-img-top {
+    max-height: 186px;
+    min-height: 186px;
+    max-width: 186px;
+}
+
+.card-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-height: 48px;
+}
+
+.user-infor {
+    flex: 0.2;
+}
+
+.comment {
+    flex: 0.8;
+}
+
+.input-text {
+    display: none;
+    height: 90px;
+}
+
+.sub-comment {
+    margin-left: 20px;
+}
+
+.icon-send {
+    font-size: 30px;
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    cursor: pointer;
+}
